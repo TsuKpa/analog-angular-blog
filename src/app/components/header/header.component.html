@@ -1,0 +1,97 @@
+<header class="bg-white border-b border-gray-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo/Brand -->
+      <div class="flex items-center">
+        <a routerLink="/" class="text-xl font-bold text-gray-900 hover:text-gray-700 transition-colors">
+          TsuKpa's Blog
+        </a>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="hidden md:flex space-x-8">
+        <a
+          routerLink="/"
+          routerLinkActive="text-black font-semibold border-b-2 border-black"
+          [routerLinkActiveOptions]="{exact: true}"
+          class="text-gray-700 hover:text-black px-3 py-2 text-sm font-medium transition-colors"
+        >
+          Home
+        </a>
+        <a
+          routerLink="/blog"
+          routerLinkActive="text-black font-semibold border-b-2 border-black"
+          class="text-gray-700 hover:text-black px-3 py-2 text-sm font-medium transition-colors"
+        >
+          Blog
+        </a>
+        <a
+          routerLink="/aws-workshops"
+          routerLinkActive="text-black font-semibold border-b-2 border-black"
+          class="text-gray-700 hover:text-black px-3 py-2 text-sm font-medium transition-colors"
+        >
+          AWS Workshops
+        </a>
+        <a
+          routerLink="/about"
+          routerLinkActive="text-black font-semibold border-b-2 border-black"
+          class="text-gray-700 hover:text-black px-3 py-2 text-sm font-medium transition-colors"
+        >
+          About me
+        </a>
+      </nav>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden">
+        <button
+          type="button"
+          class="text-gray-700 hover:text-gray-900 focus:outline-none focus:text-gray-900"
+          (click)="toggleMobileMenu()"
+        >
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div *ngIf="isMobileMenuOpen" class="md:hidden">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200">
+        <a
+          routerLink="/"
+          routerLinkActive="bg-gray-100 text-black"
+          [routerLinkActiveOptions]="{exact: true}"
+          class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-black hover:bg-gray-100 rounded-md transition-colors"
+          (click)="closeMobileMenu()"
+        >
+          Home
+        </a>
+        <a
+          routerLink="/blog"
+          routerLinkActive="bg-gray-100 text-black"
+          class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-black hover:bg-gray-100 rounded-md transition-colors"
+          (click)="closeMobileMenu()"
+        >
+          Blog
+        </a>
+        <a
+          routerLink="/aws-workshops"
+          routerLinkActive="bg-gray-100 text-black"
+          class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-black hover:bg-gray-100 rounded-md transition-colors"
+          (click)="closeMobileMenu()"
+        >
+          AWS Workshops
+        </a>
+        <a
+          routerLink="/about"
+          routerLinkActive="bg-gray-100 text-black"
+          class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-black hover:bg-gray-100 rounded-md transition-colors"
+          (click)="closeMobileMenu()"
+        >
+          About me
+        </a>
+      </div>
+    </div>
+  </div>
+</header>

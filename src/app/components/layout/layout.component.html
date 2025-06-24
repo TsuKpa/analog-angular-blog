@@ -1,0 +1,18 @@
+<div class="min-h-screen bg-gray-50 flex flex-col">
+  <!-- Header -->
+  <app-header />
+
+  <!-- Main Layout Container -->
+  <div class="flex-1 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pb-8 pt-3 w-full">
+    <!-- Main Content (Center Column) -->
+    <main class="max-w-6xl mx-auto w-full">
+      <router-outlet />
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <app-footer />
+
+  <!-- Scroll to top button -->
+  <app-scroll-to-top />
+</div>

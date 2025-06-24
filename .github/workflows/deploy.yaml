@@ -1,0 +1,80 @@
+name: Build and Deploy Angular App to S3 and CloudFront
+
+# Trigger deploy when push event occur on branch master
+on:
+  push:
+    branches:
+      - master
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to S3 and cloudfront
+permissions:
+  id-token: write
+  contents: read
+
+# Default to bash
+defaults:
+  run:
+    shell: bash
+jobs:
+  lint:
+    name: Linting, TypeCheck, Testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v2
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.19.1
+
+      - name: 📥 Download deps
+        run: npm install --no-frozen-lockfile
+
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    environment: dev # the name config in the github interface
+    env:
+      # Where you want to deploy, choose the nearest location for lowest latency exp: ap-southeast-1
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      # AWS_ACCOUNT_ID is in the top right in the AWS Console
+      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+      # you must create this role for OpenID Connect (OIDC) sts aws github identity provider IAM
+      AWS_S3_ASSUME_ROLE: ${{ secrets.AWS_S3_ASSUME_ROLE }}
+      # Your S3 bucket name where store your static web app after build
+      BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
+      # example: arn:aws:cloudfront::<YOUR_ACCOUNT_ID>:distribution/<CF_DISTRIBUTION_ID> <--- the cloudfront id here
+      CF_DISTRIBUTION_ID: ${{ secrets.CF_DISTRIBUTION_ID }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.19.1
+
+      - name: Install dependencies
+        run: npm install --frozen-lockfile
+
+      - name: Build
+        run: npm run build
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4.0.2
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/${{ env.AWS_S3_ASSUME_ROLE }}
+          role-session-name: ${{ env.AWS_S3_ASSUME_ROLE }} # this name can be any
+          mask-aws-account-id: true
+
+      - name: Deploy to S3
+        run: aws s3 sync ./out s3://${{ env.BUCKET_NAME }} --delete --cache-control max-age=31536000
+
+      - name: Invalidate CloudFront Cache
+        run: aws cloudfront create-invalidation --distribution-id ${{ env.CF_DISTRIBUTION_ID }} --paths "/*"
