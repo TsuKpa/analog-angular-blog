@@ -82,9 +82,9 @@ The credentials is something like this
   "Code" : "Success",
   "LastUpdated" : "2024-08-03T06:06:45Z",
   "Type" : "AWS-HMAC",
-  "AccessKeyId" : "ASIAWDEGI6ESSSXVEBFW",
-  "SecretAccessKey" : "KwN5anzRvzoxtqzW6k6poMSc0T8zVIk1lnAmr",
-  "Token" : "IQoJb3JpZ2luX2VjELf//////////Wgh/dD4mbF4wRNTeW/qWkOWil0FuI6t5pcnBy/kUO7eOCQ==",
+  "AccessKeyId" : "xxxxxxx",
+  "SecretAccessKey" : "xxxxxxxxx",
+  "Token" : "xxxxxxxxxxx",
   "Expiration" : "2024-08-03T12:40:56Z"
 }
 ```
