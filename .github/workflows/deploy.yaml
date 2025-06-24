@@ -74,7 +74,7 @@ jobs:
           mask-aws-account-id: true
 
       - name: Deploy to S3
-        run: aws s3 sync ./out s3://${{ env.BUCKET_NAME }} --delete --cache-control max-age=31536000
+        run: aws s3 sync ./dist/client s3://${{ env.BUCKET_NAME }} --delete --cache-control max-age=31536000
 
       - name: Invalidate CloudFront Cache
         run: aws cloudfront create-invalidation --distribution-id ${{ env.CF_DISTRIBUTION_ID }} --paths "/*"
