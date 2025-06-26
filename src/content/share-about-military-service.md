@@ -75,7 +75,7 @@ Lúc mình nói học ĐH xong thì ảnh đổi viết màu đỏ (Lúc này m�
   - __Lễ nhập ngũ__: Ăn cơm sáng xong thì chuẩn bị làm lễ thôi. Mọi người đứng thành các hàng chia theo xã, sau đó điểm danh xem có ai trốn không. Đúng giờ, tiếng kẻng vang lên, buổi lễ bắt đầu với sự tham gia của chỉ huy quân sự huyện và cán bộ UBND tỉnh. Tiếp theo là múa lân, chỉ huy huyện đọc nội dung buổi lễ, bắt tay cảm ơn,... Cuối cùng là tiễn quân nhân qua cầu Vinh Quang thực hiện nhiệm vụ bảo vệ đất nước 🇻🇳.
   Xe tiễn quân là loại xe 60 chỗ ngồi, cũng khá xịn nhưng vì lên sau nên không có chỗ ngồi, phải ngồi dưới. Lúc này mình thật sự buồn vì ba mẹ đứng ở dưới xe ngó lên xem mình ở đâu nhưng vì kính đen nên không thấy 😥.
 
-![nhap-ngu](https://o.rada.vn/data/image/2021/01/27/Nhap-ngu-700.jpg)
+![nhap-ngu](https://suckhoedoisong.qltns.mediacdn.vn/324455921873985536/2022/2/16/3-16449812897942021567294-16449823409731819562570.jpeg)
 
 ## 2. Trải nghiệm khi là quân nhân ở một đơn vị chủ lực của Quân đội Nhân dân Việt Nam 🎖️
 
