@@ -5,10 +5,10 @@ import { AsyncPipe, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { injectContent, MarkdownComponent } from '@analogjs/content';
 import PostAttributes from './data/post-attributes';
-import { Meta, Title } from '@angular/platform-browser';
 import { tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { isProduction } from '../../../environments/vite-env';
+import { MetaTagService } from '../../services/meta.service';
 
 @Component({
   selector: 'app-blog-post',
@@ -33,7 +33,6 @@ import { isProduction } from '../../../environments/vite-env';
           </div>
         </div>
 
-        <img class="post__image" [src]="post.attributes.coverImage" />
         <analog-markdown [content]="post.content" />
         <div [appUtterances]="isProd"></div>
       </article>
@@ -43,8 +42,7 @@ import { isProduction } from '../../../environments/vite-env';
   styleUrl: './index.page.scss',
 })
 export default class BlogPostComponent {
-  private readonly title = inject(Title);
-  private readonly meta = inject(Meta);
+  private readonly metaTagService = inject(MetaTagService);
   isProd = false;
 
   ngOnInit() {
@@ -66,12 +64,14 @@ export default class BlogPostComponent {
   // No custom tag color methods needed
 
   readonly post$ = injectContent<PostAttributes>('slug').pipe(
-    tap(({ attributes: { title, description, coverImage } }) => {
-      this.title.setTitle(title);
-      this.meta.updateTag({ name: 'description', content: description });
-      this.meta.updateTag({ name: 'og:description', content: description });
-      this.meta.updateTag({ name: 'og:image', content: coverImage! });
-      this.meta.updateTag({ name: 'og:title', content: title });
+    tap(({ attributes: { title, description, coverImage, slug } }) => {
+      this.metaTagService.updateMetaTags({
+        title: title,
+        description: description,
+        image: coverImage || undefined,
+        type: 'article',
+        url: `https://v2.tsukpa.blog/blog/${slug}`
+      });
     })
   );
 }

@@ -1,5 +1,5 @@
 import { ContactComponent } from './../components/contact/contact.component';
-import { Component, computed } from '@angular/core';
+import { Component, OnInit, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { injectContentFiles } from '@analogjs/content';
 import PostAttributes from './blog/data/post-attributes';
@@ -10,6 +10,7 @@ import {
 } from '../components/blog-post-card/blog-post-card.component';
 import { WorkshopCardComponent } from '../components/workshop-card/workshop-card.component';
 import { getRandomQuote, type Quote } from './quotes-data';
+import { MetaTagService } from '../services/meta.service';
 
 @Component({
   selector: 'app-home',
@@ -144,7 +145,17 @@ import { getRandomQuote, type Quote } from './quotes-data';
     `,
   ],
 })
-export default class HomeComponent {
+export default class HomeComponent implements OnInit {
+  private readonly metaTagService = inject(MetaTagService);
+
+  ngOnInit() {
+    this.metaTagService.updateMetaTags({
+      title: 'Tsukpa - Software Developer, AWS Certified, Technical Writer',
+      description: 'Personal website of Tsukpa, sharing insights on software development, AWS, and technical tutorials.',
+      url: 'https://v2.tsukpa.blog/',
+      type: 'website'
+    });
+  }
   readonly posts = injectContentFiles<PostAttributes>().filter(
     (post) => post.attributes.publish
   );

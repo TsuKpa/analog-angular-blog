@@ -48,7 +48,9 @@ export default defineConfig(({ mode }) => {
         },
         prerender: {
           routes: async () => [
+            '/',
             '/blog',
+            '/about',
             {
               contentDir: 'src/content',
               transform: (file: PrerenderContentFile) => {

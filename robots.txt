@@ -1,1 +1,7 @@
+User-agent: *
+Allow: /
+
 User-agent: GPTBot
+Disallow: /
+
+Sitemap: https://v2.tsukpa.blog/sitemap.xml

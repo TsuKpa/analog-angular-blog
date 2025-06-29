@@ -1,6 +1,7 @@
-import { Component, computed } from '@angular/core';
+import { Component, OnInit, computed, inject } from '@angular/core';
 import { workshops, type WorkShop } from './data/workshop-data';
 import { WorkshopCardComponent } from '../../components/workshop-card/workshop-card.component';
+import { MetaTagService } from '../../services/meta.service';
 
 @Component({
   selector: 'app-aws-workshops',
@@ -27,7 +28,18 @@ import { WorkshopCardComponent } from '../../components/workshop-card/workshop-c
     }
   `],
 })
-export default class AwsWorkshopsComponent {
+export default class AwsWorkshopsComponent implements OnInit {
+  private metaTagService = inject(MetaTagService);
+
+  ngOnInit() {
+    this.metaTagService.updateMetaTags({
+      title: 'AWS Workshops - Learn Cloud Computing Hands-On',
+      description: 'Free hands-on workshops to learn AWS cloud services with practical labs and step-by-step exercises.',
+      url: 'https://v2.tsukpa.blog/aws-workshops',
+      type: 'website'
+    });
+  }
+
   readonly sortedWorkshops = computed(() => {
     return [...workshops].sort((a, b) =>
       new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime()

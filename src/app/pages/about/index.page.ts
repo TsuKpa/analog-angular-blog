@@ -2,9 +2,10 @@ import { EducationComponent } from './../../components/education/education.compo
 import { CertificationsComponent } from './../../components/certifications/certifications.component';
 import { SkillsComponent } from './../../components/skills/skills.component';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { WorkExperienceComponent } from '../../components/work-experience/work-experience.component';
 import { SocialComponent } from './../../components/social/social.component';
+import { MetaTagService } from '../../services/meta.service';
 
 @Component({
   selector: 'app-about',
@@ -54,5 +55,15 @@ import { SocialComponent } from './../../components/social/social.component';
     `,
   ],
 })
-export default class AboutPage {
+export default class AboutPage implements OnInit {
+  private metaTagService = inject(MetaTagService);
+
+  ngOnInit() {
+    this.metaTagService.updateMetaTags({
+      title: 'About - Tsukpa - Software Developer & Technical Writer',
+      description: 'Learn more about Tsukpa, my skills, certifications, experience, and background as a software developer.',
+      url: 'https://v2.tsukpa.blog/about',
+      type: 'profile'
+    });
+  }
 }

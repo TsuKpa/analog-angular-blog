@@ -1,9 +1,10 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, OnInit, signal, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { injectContentFiles } from '@analogjs/content';
 
 import PostAttributes from './data/post-attributes';
 import { BlogPostCardComponent } from '../../components/blog-post-card/blog-post-card.component';
+import { MetaTagService } from '../../services/meta.service';
 
 @Component({
   selector: 'app-blog',
@@ -72,7 +73,17 @@ import { BlogPostCardComponent } from '../../components/blog-post-card/blog-post
   `,
   styles: [],
 })
-export default class BlogComponent {
+export default class BlogComponent implements OnInit {
+  private readonly metaTagService = inject(MetaTagService);
+
+  ngOnInit() {
+    this.metaTagService.updateMetaTags({
+      title: 'Blog - Articles on Web Development, AWS, and Technical Tutorials',
+      description: 'Explore articles on web development, AWS cloud services, and various technical topics.',
+      url: 'https://v2.tsukpa.blog/blog',
+      type: 'website'
+    });
+  }
   readonly posts = injectContentFiles<PostAttributes>().filter(post => post.attributes.publish);
   activeTag = signal<string | null>(null);
 

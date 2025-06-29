@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed } from '@angular/core';
+import { Component, inject, signal, computed, OnInit, effect } from '@angular/core';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { injectContentFiles } from '@analogjs/content';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 
 import PostAttributes from '../data/post-attributes';
 import { BlogPostCardComponent } from '../../../components/blog-post-card/blog-post-card.component';
+import { MetaTagService } from '../../../services/meta.service';
 
 @Component({
   selector: 'app-blog-tag',
@@ -42,9 +43,25 @@ import { BlogPostCardComponent } from '../../../components/blog-post-card/blog-p
   `,
   styles: [],
 })
-export default class BlogTagComponent {
+export default class BlogTagComponent implements OnInit {
   private route = inject(ActivatedRoute);
+  private metaTagService = inject(MetaTagService);
   readonly posts = injectContentFiles<PostAttributes>().filter(post => post.attributes.publish);
+
+  ngOnInit() {
+    // Create an effect that updates meta tags when tag changes
+    effect(() => {
+      const currentTag = this.tagName();
+      if (currentTag) {
+        this.metaTagService.updateMetaTags({
+          title: `Posts Tagged "${currentTag}" - Tsukpa's Blog`,
+          description: `Browse all blog posts tagged with #${currentTag} on Tsukpa's Blog.`,
+          url: `https://v2.tsukpa.blog/blog/tag/${currentTag}`,
+          type: 'website'
+        });
+      }
+    });
+  }
 
   readonly tagName = toSignal(
     this.route.params.pipe(
