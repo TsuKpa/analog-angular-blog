@@ -8,6 +8,7 @@ import PostAttributes from './data/post-attributes';
 import { Meta, Title } from '@angular/platform-browser';
 import { tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { isProduction } from '../../../environments/vite-env';
 
 @Component({
   selector: 'app-blog-post',
@@ -47,7 +48,13 @@ export default class BlogPostComponent {
   isProd = false;
 
   ngOnInit() {
-    this.isProd = environment.production;
+    // Use both the environment.production flag and our helper function
+    this.isProd = environment.production || isProduction();
+    // Only log in development mode
+    if (!this.isProd) {
+      console.log('Environment:', environment);
+      console.log('Is Production (vite):', isProduction());
+    }
   }
 
   ngAfterViewChecked() {
