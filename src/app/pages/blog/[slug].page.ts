@@ -191,7 +191,17 @@ export default class BlogPostComponent
             }
 
             const {
-              attributes: { title, description, coverImage, createdDate, lastmod, authors, tags, canonical_url },
+              attributes: { 
+                title, 
+                description, 
+                coverImage,
+                photo,  // Add photo field as another possible image source
+                createdDate, 
+                lastmod, 
+                authors, 
+                tags, 
+                canonical_url 
+              },
             } = post;
 
             // Determine canonical URL
@@ -199,12 +209,18 @@ export default class BlogPostComponent
             // Otherwise use the current URL as canonical
             const postUrl = `${this.metaTagService.siteUrl}/blog/${currentSlug}`;
             const canonicalUrl = canonical_url || postUrl;
+            
+            // Try to find an image for the blog post, with fallbacks
+            const postImage = coverImage || photo;
+            
+            // Default logo for publisher
+            const publisherLogo = getCdnImageUrl('background.png');
 
             // Create blog post meta config with structured data information
             const blogPostMeta: BlogPostMetaConfig = {
               title: title,
               description: description,
-              image: coverImage || undefined,
+              image: postImage, // This could be undefined, but our service now handles that
               type: 'article',
               url: postUrl,
               canonical: canonicalUrl, // Set canonical URL
@@ -220,7 +236,7 @@ export default class BlogPostComponent
               // Publisher information
               publisher: {
                 name: 'Tsukpa Blog',
-                logo: getCdnImageUrl('background.png')
+                logo: publisherLogo
               }
             };
 

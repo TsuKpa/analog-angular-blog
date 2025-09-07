@@ -1,7 +1,13 @@
 User-agent: *
 Allow: /
+Allow: /assets/images/
+Allow: /content/images/
 
 User-agent: GPTBot
 Disallow: /
+
+User-agent: Googlebot-Image
+Allow: /assets/images/
+Allow: /content/images/
 
 Sitemap: https://v2.tsukpa.blog/sitemap.xml

@@ -104,11 +104,15 @@ export class MetaTagService {
       type: 'article'
     });
 
+    // Get image URL with fallback to default
+    // The UrlService.getImageUrl() will handle undefined and return a default image
+    const imageUrl = this.urlService.getImageUrl(config.image);
+
     // Add structured data for blog post
     this.structuredDataService.addBlogPostingStructuredData({
       headline: config.title,
       description: config.description,
-      image: config.image ? this.urlService.getImageUrl(config.image) : undefined,
+      image: imageUrl, // Always include an image
       datePublished: config.datePublished,
       dateModified: config.dateModified,
       author: config.author,

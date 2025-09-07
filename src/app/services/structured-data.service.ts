@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { UrlService } from './url.service';
 
 export interface BlogPostingStructuredData {
   headline: string;
@@ -23,6 +24,7 @@ export interface BlogPostingStructuredData {
 })
 export class StructuredDataService {
   private readonly document = inject(DOCUMENT);
+  private readonly urlService = inject(UrlService);
 
   /**
    * Adds JSON-LD structured data to the page for a blog post
@@ -34,7 +36,7 @@ export class StructuredDataService {
       '@type': 'BlogPosting',
       headline: data.headline,
       description: data.description,
-      image: data.image || '',
+      image: data.image || this.urlService.getImageUrl(), // Always include an image, use default if none provided
       datePublished: data.datePublished,
       dateModified: data.dateModified || data.datePublished,
       author: {
