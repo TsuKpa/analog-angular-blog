@@ -1,11 +1,23 @@
 import { HighlightService } from './../../services/highlight.service';
 import { UtterancesDirective } from './utterances.directive';
-import { Component, OnInit, OnDestroy, inject, AfterViewChecked } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  inject,
+  AfterViewChecked,
+  Injector,
+} from '@angular/core';
 import { AsyncPipe, DatePipe } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { injectContent, MarkdownComponent } from '@analogjs/content';
+import { RouterLink, Router, ActivatedRoute } from '@angular/router';
+import {
+  injectContent,
+  injectContentFiles,
+  MarkdownComponent,
+} from '@analogjs/content';
+import { runInInjectionContext } from '@angular/core';
 import PostAttributes from './data/post-attributes';
-import { tap, Subscription } from 'rxjs';
+import { tap, Subscription, map, switchMap, of, catchError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { isProduction } from '../../../environments/vite-env';
 import { MetaTagService } from '../../services/meta.service';
@@ -15,7 +27,15 @@ import { MarkdownImageDirective } from '../../directives/markdown-image.directiv
 
 @Component({
   selector: 'app-blog-post',
-  imports: [AsyncPipe, DatePipe, RouterLink, MarkdownComponent, UtterancesDirective, ImageModalComponent, MarkdownImageDirective],
+  imports: [
+    AsyncPipe,
+    DatePipe,
+    RouterLink,
+    MarkdownComponent,
+    UtterancesDirective,
+    ImageModalComponent,
+    MarkdownImageDirective,
+  ],
   template: `
     @if (post$ | async; as post) {
     <div class="py-8">
@@ -55,9 +75,17 @@ import { MarkdownImageDirective } from '../../directives/markdown-image.directiv
   `,
   styleUrl: './index.page.scss',
 })
-export default class BlogPostComponent implements OnInit, AfterViewChecked, OnDestroy {
+export default class BlogPostComponent
+  implements OnInit, AfterViewChecked, OnDestroy
+{
   private readonly metaTagService = inject(MetaTagService);
+  private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
+  private readonly injector = inject(Injector);
   isProd = false;
+
+  // Will store all available blog posts from content files
+  private allPosts: Array<{ slug: string; attributes: PostAttributes }> = [];
 
   // Image modal variables
   modalIsOpen = false;
@@ -65,6 +93,7 @@ export default class BlogPostComponent implements OnInit, AfterViewChecked, OnDe
   modalImageAlt = '';
   modalIsErrorImage = false;
   private imageClickSubscription?: Subscription;
+  private postSubscription?: Subscription;
 
   getCoverImage(post: any): string {
     return post?.attributes?.coverImage || '';
@@ -73,23 +102,27 @@ export default class BlogPostComponent implements OnInit, AfterViewChecked, OnDe
   ngOnInit() {
     // Use both the environment.production flag and our helper function
     this.isProd = environment.production || isProduction();
-    // Only log in development mode
-    if (!this.isProd) {
-      console.log('Environment:', environment);
-      console.log('Is Production (vite):', isProduction());
-    }
+
+    // Get all available content files using runInInjectionContext to ensure proper injection context
+    runInInjectionContext(this.injector, () => {
+      this.allPosts = injectContentFiles<PostAttributes>();
+    });
+
+    // Initialize the post$ observable after allPosts is loaded
+    this.initPostObservable();
 
     // Import the static subject directly from the directive
-    import('../../directives/clickable-image.directive').then(module => {
+    import('../../directives/clickable-image.directive').then((module) => {
       // Subscribe to image click events from the clickable image directive
-      this.imageClickSubscription = module.ClickableImageDirective.imageClicked.subscribe(
-        (event: ImageClickEvent) => {
-          this.modalImageSrc = event.src;
-          this.modalImageAlt = event.alt;
-          this.modalIsErrorImage = event.isError;
-          this.modalIsOpen = true;
-        }
-      );
+      this.imageClickSubscription =
+        module.ClickableImageDirective.imageClicked.subscribe(
+          (event: ImageClickEvent) => {
+            this.modalImageSrc = event.src;
+            this.modalImageAlt = event.alt;
+            this.modalIsErrorImage = event.isError;
+            this.modalIsOpen = true;
+          }
+        );
     });
   }
 
@@ -101,6 +134,9 @@ export default class BlogPostComponent implements OnInit, AfterViewChecked, OnDe
     if (this.imageClickSubscription) {
       this.imageClickSubscription.unsubscribe();
     }
+    if (this.postSubscription) {
+      this.postSubscription.unsubscribe();
+    }
   }
 
   closeModal() {
@@ -111,15 +147,66 @@ export default class BlogPostComponent implements OnInit, AfterViewChecked, OnDe
 
   // No custom tag color methods needed
 
-  readonly post$ = injectContent<PostAttributes>('slug').pipe(
-    tap(({ attributes: { title, description, coverImage, slug } }) => {
-      this.metaTagService.updateMetaTags({
-        title: title,
-        description: description,
-        image: coverImage || undefined,
-        type: 'article',
-        url: `${this.metaTagService.siteUrl}/blog/${slug}`
-      });
-    })
-  );
+  // Define the post$ observable - will be properly initialized in ngOnInit
+  post$ = of(null as any);
+
+  // Set up the post$ observable in ngOnInit after we have the allPosts data
+  private initPostObservable() {
+    this.post$ = this.route.paramMap.pipe(
+      map((params) => params.get('slug')),
+      switchMap((currentSlug) => {
+        if (!currentSlug) {
+          console.warn('No slug parameter in URL, redirecting to 404');
+          this.router.navigate(['/404']);
+          return of(null);
+        }
+
+        // We now have allPosts loaded, so check if the requested slug exists
+        const postExists = this.allPosts.some(
+          (post) => post.slug === currentSlug
+        );
+
+        if (!postExists) {
+          console.warn(
+            `Post with slug "${currentSlug}" not found, redirecting to 404`
+          );
+          this.router.navigate(['/404']);
+          return of(null);
+        }
+
+        // Use runInInjectionContext to ensure proper injection context for injectContent
+        return runInInjectionContext(this.injector, () => {
+          // With Analog.js content routing, injectContent() will use the current route params
+          // so we don't need to explicitly provide the slug
+          return injectContent<PostAttributes>();
+        }).pipe(
+          tap((post) => {
+            if (!post) {
+              console.error(
+                'Post was found in content files but could not be loaded'
+              );
+              this.router.navigate(['/404']);
+              return;
+            }
+
+            const {
+              attributes: { title, description, coverImage, slug },
+            } = post;
+            this.metaTagService.updateMetaTags({
+              title: title,
+              description: description,
+              image: coverImage || undefined,
+              type: 'article',
+              url: `${this.metaTagService.siteUrl}/blog/${slug}`,
+            });
+          }),
+          catchError((error) => {
+            console.error('Error loading blog post:', error);
+            this.router.navigate(['/404']);
+            return of(null);
+          })
+        );
+      })
+    );
+  }
 }

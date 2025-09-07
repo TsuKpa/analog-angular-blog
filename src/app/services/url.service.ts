@@ -9,6 +9,7 @@ export class UrlService {
   // Default images
   private readonly defaultImage = 'background.png';
   private readonly noImage = 'error-image.svg';
+  private readonly notFoundImage = '404.svg'; // Make sure this file exists in your CDN
 
   /**
    * Get a full CDN URL for an image
@@ -35,6 +36,14 @@ export class UrlService {
    */
   getNoImageUrl(): string {
     return this.getCdnUrl(this.noImage);
+  }
+
+  /**
+   * Get the 404 not found image URL
+   * @returns The 404 image URL
+   */
+  getNotFoundImageUrl(): string {
+    return this.getCdnUrl(this.notFoundImage);
   }
 
   /**
