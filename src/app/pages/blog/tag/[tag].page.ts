@@ -90,7 +90,7 @@ export default class BlogTagComponent implements OnInit {
         this.metaTagService.updateMetaTags({
           title: `Posts Tagged "${currentTag}" - Tsukpa's Blog`,
           description: `Browse all blog posts tagged with #${currentTag} on Tsukpa's Blog.`,
-          url: `https://v2.tsukpa.blog/blog/tag/${currentTag}`,
+          url: `${this.metaTagService.siteUrl}/blog/tag/${currentTag}`,
           type: 'website',
         });
       }

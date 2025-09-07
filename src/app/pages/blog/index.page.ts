@@ -80,7 +80,7 @@ export default class BlogComponent implements OnInit {
     this.metaTagService.updateMetaTags({
       title: 'Blog - Articles on Web Development, AWS, and Technical Tutorials',
       description: 'Explore articles on web development, AWS cloud services, and various technical topics.',
-      url: 'https://v2.tsukpa.blog/blog',
+      url: `${this.metaTagService.siteUrl}/blog`,
       type: 'website'
     });
   }

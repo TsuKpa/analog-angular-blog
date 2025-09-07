@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { UrlService } from '../../services/url.service';
 
 export interface BlogPost {
   slug: string;
@@ -20,7 +21,14 @@ export interface BlogPost {
   imports: [RouterLink],
   template: `
     <a [routerLink]="['/blog', post.slug]" class="rounded-lg bg-white text-gray-900 flex flex-col overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-300 ease-out h-full">
-      <img [src]="post.attributes.photo || post.attributes.coverImage" [alt]="post.attributes.title" class="h-48 w-full overflow-hidden object-cover object-center">
+      <div class="relative h-48 w-full overflow-hidden">
+        <img
+          [src]="getImageUrl(post.attributes.photo || post.attributes.coverImage)"
+          [alt]="post.attributes.title"
+          class="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-105"
+          (error)="handleImageError($event)"
+        >
+      </div>
       <div class="flex flex-col px-3 pt-3 pb-0 flex-grow">
         <div>
           <h3
@@ -53,7 +61,19 @@ export interface BlogPost {
 export class BlogPostCardComponent {
   @Input({ required: true }) post!: BlogPost;
 
+  private urlService = inject(UrlService);
+
   cleanText(text: string): string {
     return text?.replace(/\s+/g, ' ').trim() || '';
+  }
+
+  getImageUrl(path?: string): string {
+    return this.urlService.getImageUrl(path);
+  }
+
+  // Method to handle image loading errors
+  handleImageError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    img.src = this.urlService.getImageUrl();
   }
 }

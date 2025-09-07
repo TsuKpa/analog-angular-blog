@@ -152,7 +152,7 @@ export default class HomeComponent implements OnInit {
     this.metaTagService.updateMetaTags({
       title: 'Tsukpa - Software Developer, AWS Certified, Technical Writer',
       description: 'Personal website of Tsukpa, sharing insights on software development, AWS, and technical tutorials.',
-      url: 'https://v2.tsukpa.blog/',
+      url: this.metaTagService.siteUrl,
       type: 'website'
     });
   }

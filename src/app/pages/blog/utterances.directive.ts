@@ -2,6 +2,7 @@ import { AfterViewInit, Directive, ElementRef, Input, Renderer2 } from '@angular
 
 @Directive({
   selector: '[appUtterances]',
+  standalone: true,
 })
 export class UtterancesDirective implements AfterViewInit {
   @Input() appUtterances = false;

@@ -9,6 +9,7 @@ export default interface PostAttributes {
   tags: string[];
   photo?: string;
   coverImage?: string; // Keep for old posts
+  imageAlt?: string; // Alt text for the cover image
   source?: string;
   website?: string;
   authors?: string[];
@@ -16,6 +17,7 @@ export default interface PostAttributes {
   tweet?: string;
   format?: string;
   canonical_url?: string;
+  draft?: boolean;   // Flag for draft status
   seo?: {
     metadescription?: string;
     metatitle?: string;

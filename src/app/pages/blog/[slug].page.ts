@@ -1,24 +1,28 @@
 import { HighlightService } from './../../services/highlight.service';
 import { UtterancesDirective } from './utterances.directive';
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, AfterViewChecked } from '@angular/core';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { injectContent, MarkdownComponent } from '@analogjs/content';
 import PostAttributes from './data/post-attributes';
-import { tap } from 'rxjs';
+import { tap, Subscription } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { isProduction } from '../../../environments/vite-env';
 import { MetaTagService } from '../../services/meta.service';
+import { BlogImageComponent } from '../../components/blog-image/blog-image.component';
+import { ImageModalComponent } from '../../components/image-modal/image-modal.component';
+import { ImageClickEvent } from '../../directives/clickable-image.directive';
+import { MarkdownImageDirective } from '../../directives/markdown-image.directive';
 
 @Component({
   selector: 'app-blog-post',
-  imports: [AsyncPipe, DatePipe, RouterLink, MarkdownComponent, UtterancesDirective],
+  imports: [AsyncPipe, DatePipe, RouterLink, MarkdownComponent, UtterancesDirective, BlogImageComponent, ImageModalComponent, MarkdownImageDirective],
   template: `
     @if (post$ | async; as post) {
     <div class="py-8">
       <article>
         <!-- Tags and date header -->
-        <div class="flex justify-between items-center mb-4">
+        <div class="flex justify-between items-center mb-6">
           <div class="flex flex-wrap gap-2">
             @for (tag of post.attributes.tags; track tag) {
             <a
@@ -33,17 +37,45 @@ import { MetaTagService } from '../../services/meta.service';
           </div>
         </div>
 
-        <analog-markdown [content]="post.content" />
+        <!-- Featured image with modal capability -->
+        @if (post.attributes.coverImage) {
+          <app-blog-image
+            [src]="getCoverImage(post)"
+            [alt]="post.attributes.imageAlt || post.attributes.title"
+          ></app-blog-image>
+        }
+
+        <div class="blog-content" appMarkdownImage>
+          <analog-markdown [content]="post.content" />
+        </div>
         <div [appUtterances]="isProd"></div>
       </article>
     </div>
+
+    <!-- Global image modal for all images in blog content -->
+    <app-image-modal
+      [isOpen]="modalIsOpen"
+      [imageUrl]="modalImageSrc"
+      [imageAlt]="modalImageAlt"
+      (closed)="closeModal()"
+    ></app-image-modal>
     }
   `,
   styleUrl: './index.page.scss',
 })
-export default class BlogPostComponent {
+export default class BlogPostComponent implements OnInit, AfterViewChecked, OnDestroy {
   private readonly metaTagService = inject(MetaTagService);
   isProd = false;
+
+  // Image modal variables
+  modalIsOpen = false;
+  modalImageSrc = '';
+  modalImageAlt = '';
+  private imageClickSubscription?: Subscription;
+
+  getCoverImage(post: any): string {
+    return post?.attributes?.coverImage || '';
+  }
 
   ngOnInit() {
     // Use both the environment.production flag and our helper function
@@ -53,10 +85,32 @@ export default class BlogPostComponent {
       console.log('Environment:', environment);
       console.log('Is Production (vite):', isProduction());
     }
+
+    // Import the static subject directly from the directive
+    import('../../directives/clickable-image.directive').then(module => {
+      // Subscribe to image click events from the clickable image directive
+      this.imageClickSubscription = module.ClickableImageDirective.imageClicked.subscribe(
+        (event: ImageClickEvent) => {
+          this.modalImageSrc = event.src;
+          this.modalImageAlt = event.alt;
+          this.modalIsOpen = true;
+        }
+      );
+    });
   }
 
   ngAfterViewChecked() {
     this.highlightService.highlightAll();
+  }
+
+  ngOnDestroy() {
+    if (this.imageClickSubscription) {
+      this.imageClickSubscription.unsubscribe();
+    }
+  }
+
+  closeModal() {
+    this.modalIsOpen = false;
   }
 
   constructor(private highlightService: HighlightService) {}
@@ -70,7 +124,7 @@ export default class BlogPostComponent {
         description: description,
         image: coverImage || undefined,
         type: 'article',
-        url: `https://v2.tsukpa.blog/blog/${slug}`
+        url: `${this.metaTagService.siteUrl}/blog/${slug}`
       });
     })
   );

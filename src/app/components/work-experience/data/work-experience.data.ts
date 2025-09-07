@@ -1,3 +1,5 @@
+import { getCdnImageUrl } from '../../../utils/cdn-helper';
+
 export interface WorkExperience {
   company: string;
   companyUrl: string;
@@ -15,7 +17,7 @@ export const WORK_EXPERIENCES: WorkExperience[] = [
   {
     company: 'Rivercrane Viet Nam',
     companyUrl: 'https://rivercrane.vn/',
-    logoUrl: 'https://d9akteslg4v3w.cloudfront.net/blog/images/rivercrane_vietnam_logo.jpeg',
+    logoUrl: getCdnImageUrl('rivercrane_vietnam_logo.jpeg'),
     title: 'Full Stack Web Developer',
     period: 'March 2025 – Present',
     current: true,
@@ -38,7 +40,7 @@ export const WORK_EXPERIENCES: WorkExperience[] = [
   {
     company: 'Green Space Solution',
     companyUrl: 'https://www.gss-sol.com/',
-    logoUrl: 'https://d9akteslg4v3w.cloudfront.net/blog/images/gss.svg',
+    logoUrl: getCdnImageUrl('gss.svg'),
     title: 'Web Developer',
     period: 'March 2023 – November 2024',
     current: false,
@@ -72,7 +74,7 @@ export const WORK_EXPERIENCES: WorkExperience[] = [
     company: 'Military Service',
     companyUrl: 'https://www.mod.gov.vn/',
     logoUrl:
-      "https://d9akteslg4v3w.cloudfront.net/blog/images/Head_badge_of_the_Vietnam_People's_Army.svg", // A generic, professional icon
+      getCdnImageUrl("Head_badge_of_the_Vietnam_People's_Army.svg"), // A generic, professional icon
     title: 'Communications Soldier',
     period: 'March 2021 - February 2023',
     current: false,
@@ -96,7 +98,7 @@ export const WORK_EXPERIENCES: WorkExperience[] = [
   {
     company: 'Innoria Solutions',
     companyUrl: 'https://innoria.com/',
-    logoUrl: 'https://d9akteslg4v3w.cloudfront.net/blog/images/INNORIA.svg',
+    logoUrl: getCdnImageUrl('INNORIA.svg'),
     title: 'Software Engineer Intern',
     period: 'December 2019 - February 2021',
     current: false,

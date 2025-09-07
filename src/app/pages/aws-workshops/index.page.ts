@@ -35,7 +35,7 @@ export default class AwsWorkshopsComponent implements OnInit {
     this.metaTagService.updateMetaTags({
       title: 'AWS Workshops - Learn Cloud Computing Hands-On',
       description: 'Free hands-on workshops to learn AWS cloud services with practical labs and step-by-step exercises.',
-      url: 'https://v2.tsukpa.blog/aws-workshops',
+      url: `${this.metaTagService.siteUrl}/aws-workshops`,
       type: 'website'
     });
   }

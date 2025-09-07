@@ -6,6 +6,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { WorkExperienceComponent } from '../../components/work-experience/work-experience.component';
 import { SocialComponent } from './../../components/social/social.component';
 import { MetaTagService } from '../../services/meta.service';
+import { UrlService } from '../../services/url.service';
 
 @Component({
   selector: 'app-about',
@@ -56,13 +57,16 @@ import { MetaTagService } from '../../services/meta.service';
   ],
 })
 export default class AboutPage implements OnInit {
-  private metaTagService = inject(MetaTagService);
+  private readonly metaTagService = inject(MetaTagService);
+  private readonly urlService = inject(UrlService);
+
+  avatarUrl = this.urlService.getImageUrl('avatar-blog.jpg');
 
   ngOnInit() {
     this.metaTagService.updateMetaTags({
       title: 'About - Tsukpa - Software Developer & Technical Writer',
       description: 'Learn more about Tsukpa, my skills, certifications, experience, and background as a software developer.',
-      url: 'https://v2.tsukpa.blog/about',
+      url: `${this.metaTagService.siteUrl}/about`,
       type: 'profile'
     });
   }
