@@ -20,10 +20,11 @@ import PostAttributes from './data/post-attributes';
 import { tap, Subscription, map, switchMap, of, catchError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { isProduction } from '../../../environments/vite-env';
-import { MetaTagService } from '../../services/meta.service';
+import { MetaTagService, BlogPostMetaConfig } from '../../services/meta.service';
 import { ImageModalComponent } from '../../components/image-modal/image-modal.component';
 import { ImageClickEvent } from '../../directives/clickable-image.directive';
 import { MarkdownImageDirective } from '../../directives/markdown-image.directive';
+import { getCdnImageUrl } from '../../utils/cdn-helper';
 
 @Component({
   selector: 'app-blog-post',
@@ -190,15 +191,56 @@ export default class BlogPostComponent
             }
 
             const {
-              attributes: { title, description, coverImage, slug },
+              attributes: { title, description, coverImage, createdDate, lastmod, authors, tags, canonical_url },
             } = post;
-            this.metaTagService.updateMetaTags({
+
+            // Determine canonical URL
+            // If post has canonical_url field, use that (for posts syndicated from other sources)
+            // Otherwise use the current URL as canonical
+            const postUrl = `${this.metaTagService.siteUrl}/blog/${currentSlug}`;
+            const canonicalUrl = canonical_url || postUrl;
+
+            // Create blog post meta config with structured data information
+            const blogPostMeta: BlogPostMetaConfig = {
               title: title,
               description: description,
               image: coverImage || undefined,
               type: 'article',
-              url: `${this.metaTagService.siteUrl}/blog/${slug}`,
-            });
+              url: postUrl,
+              canonical: canonicalUrl, // Set canonical URL
+              // Use createdDate as the published date, falling back to current date if not available
+              datePublished: createdDate || new Date().toISOString(),
+              // Use lastmod as the modified date if available, otherwise use createdDate
+              dateModified: lastmod || createdDate || new Date().toISOString(),
+              // Author information
+              author: {
+                name: authors && authors.length > 0 ? authors[0] : 'Tsukpa Blog',
+                url: this.metaTagService.siteUrl
+              },
+              // Publisher information
+              publisher: {
+                name: 'Tsukpa Blog',
+                logo: getCdnImageUrl('background.png')
+              }
+            };
+
+            // Update meta tags with structured data
+            this.metaTagService.updateBlogPostMeta(blogPostMeta);
+
+            // Add author structured data
+            if (authors && authors.length > 0) {
+              this.metaTagService.addAuthorStructuredData(
+                authors[0],
+                `${this.metaTagService.siteUrl}/about`,
+                undefined,
+                `Author of ${title}`,
+                [
+                  'https://fb.com/tsukpa',
+                  'https://github.com/TsuKpa',
+                  'https://linkedin.com/in/nqnamfe1996',
+                ]
+              );
+            }
           }),
           catchError((error) => {
             console.error('Error loading blog post:', error);

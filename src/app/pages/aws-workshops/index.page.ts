@@ -32,12 +32,42 @@ export default class AwsWorkshopsComponent implements OnInit {
   private metaTagService = inject(MetaTagService);
 
   ngOnInit() {
+    const workshopsUrl = `${this.metaTagService.siteUrl}/aws-workshops`;
+
     this.metaTagService.updateMetaTags({
       title: 'AWS Workshops - Learn Cloud Computing Hands-On',
       description: 'Free hands-on workshops to learn AWS cloud services with practical labs and step-by-step exercises.',
-      url: `${this.metaTagService.siteUrl}/aws-workshops`,
+      url: workshopsUrl,
+      canonical: workshopsUrl, // Set canonical URL
       type: 'website'
     });
+
+    // Add collection page structured data for workshops
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      'name': 'AWS Workshops - Learn Cloud Computing Hands-On',
+      'description': 'Free hands-on workshops to learn AWS cloud services with practical labs and step-by-step exercises.',
+      'url': workshopsUrl,
+      'publisher': {
+        '@type': 'Person',
+        'name': 'Tsukpa',
+        'url': `${this.metaTagService.siteUrl}/about`
+      },
+      'mainEntity': {
+        '@type': 'ItemList',
+        'itemListElement': this.sortedWorkshops().map((workshop, index) => ({
+          '@type': 'ListItem',
+          'position': index + 1,
+          'url': workshop.url || `${this.metaTagService.siteUrl}/aws-workshops`,
+          'name': workshop.title,
+          'description': this.cleanText(workshop.description)
+        }))
+      }
+    });
+    document.head.appendChild(script);
   }
 
   readonly sortedWorkshops = computed(() => {

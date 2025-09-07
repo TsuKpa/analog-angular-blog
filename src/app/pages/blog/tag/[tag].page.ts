@@ -87,10 +87,13 @@ export default class BlogTagComponent implements OnInit {
     effect(() => {
       const currentTag = this.tagName();
       if (currentTag) {
+        const tagUrl = `${this.metaTagService.siteUrl}/blog/tag/${currentTag}`;
+
         this.metaTagService.updateMetaTags({
           title: `Posts Tagged "${currentTag}" - Tsukpa's Blog`,
           description: `Browse all blog posts tagged with #${currentTag} on Tsukpa's Blog.`,
-          url: `${this.metaTagService.siteUrl}/blog/tag/${currentTag}`,
+          url: tagUrl,
+          canonical: tagUrl, // Set canonical URL
           type: 'website',
         });
       }

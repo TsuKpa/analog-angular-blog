@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { UrlService } from '../services/url.service';
 import { RouterLink } from '@angular/router';
+import { MetaTagService } from '../services/meta.service';
 
 @Component({
   selector: 'app-not-found',
@@ -38,7 +39,21 @@ import { RouterLink } from '@angular/router';
     </div>
   `,
 })
-export default class NotFoundPage {
+export default class NotFoundPage implements OnInit {
   private urlService = inject(UrlService);
+  private metaTagService = inject(MetaTagService);
   notFoundImageUrl = this.urlService.getNotFoundImageUrl();
+
+  ngOnInit() {
+    const homeUrl = this.metaTagService.siteUrl;
+
+    // For 404 pages, canonical URL should point to homepage
+    this.metaTagService.updateMetaTags({
+      title: '404 - Page Not Found',
+      description: 'The page you are looking for does not exist or has been moved.',
+      url: `${homeUrl}/404`,
+      canonical: homeUrl, // Set canonical URL to homepage
+      type: 'website',
+    });
+  }
 }

@@ -11,6 +11,7 @@ import {
 import { WorkshopCardComponent } from '../components/workshop-card/workshop-card.component';
 import { getRandomQuote, type Quote } from './quotes-data';
 import { MetaTagService } from '../services/meta.service';
+import { getCdnImageUrl } from '../utils/cdn-helper';
 
 @Component({
   selector: 'app-home',
@@ -149,12 +150,29 @@ export default class HomeComponent implements OnInit {
   private readonly metaTagService = inject(MetaTagService);
 
   ngOnInit() {
+    const homeUrl = this.metaTagService.siteUrl;
+
+    // Set basic meta tags
     this.metaTagService.updateMetaTags({
-      title: 'Tsukpa - Software Developer, AWS Certified, Technical Writer',
+      title: 'Tsukpa - Software Engineer, AWS Certified, Technical Writer',
       description: 'Personal website of Tsukpa, sharing insights on software development, AWS, and technical tutorials.',
-      url: this.metaTagService.siteUrl,
+      url: homeUrl,
+      canonical: homeUrl, // Set canonical URL
       type: 'website'
     });
+
+    // Add author structured data
+    this.metaTagService.addAuthorStructuredData(
+      'Tsukpa',
+      `${this.metaTagService.siteUrl}/about`,
+      getCdnImageUrl('avatar-blog.jpg'),
+      'Software Engineer, AWS Certified, Technical Writer',
+      [
+        'https://fb.com/tsukpa',
+        'https://github.com/TsuKpa',
+        'https://linkedin.com/in/nqnamfe1996'
+      ]
+    );
   }
   readonly posts = injectContentFiles<PostAttributes>().filter(
     (post) => post.attributes.publish

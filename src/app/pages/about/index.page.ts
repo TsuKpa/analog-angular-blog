@@ -63,11 +63,27 @@ export default class AboutPage implements OnInit {
   avatarUrl = this.urlService.getImageUrl('avatar-blog.jpg');
 
   ngOnInit() {
+    const aboutUrl = `${this.metaTagService.siteUrl}/about`;
+
     this.metaTagService.updateMetaTags({
       title: 'About - Tsukpa - Software Developer & Technical Writer',
       description: 'Learn more about Tsukpa, my skills, certifications, experience, and background as a software developer.',
-      url: `${this.metaTagService.siteUrl}/about`,
+      url: aboutUrl,
+      canonical: aboutUrl, // Set canonical URL
       type: 'profile'
     });
+
+    // Add person structured data for the about page
+    this.metaTagService.addAuthorStructuredData(
+      'Tsukpa',
+      aboutUrl,
+      this.avatarUrl,
+      'Software Engineer, AWS Certified, Technical Writer',
+      [
+        'https://fb.com/tsukpa',
+        'https://github.com/TsuKpa',
+        'https://linkedin.com/in/nqnamfe1996'
+      ]
+    );
   }
 }
