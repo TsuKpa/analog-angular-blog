@@ -9,14 +9,13 @@ import { tap, Subscription } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { isProduction } from '../../../environments/vite-env';
 import { MetaTagService } from '../../services/meta.service';
-import { BlogImageComponent } from '../../components/blog-image/blog-image.component';
 import { ImageModalComponent } from '../../components/image-modal/image-modal.component';
 import { ImageClickEvent } from '../../directives/clickable-image.directive';
 import { MarkdownImageDirective } from '../../directives/markdown-image.directive';
 
 @Component({
   selector: 'app-blog-post',
-  imports: [AsyncPipe, DatePipe, RouterLink, MarkdownComponent, UtterancesDirective, BlogImageComponent, ImageModalComponent, MarkdownImageDirective],
+  imports: [AsyncPipe, DatePipe, RouterLink, MarkdownComponent, UtterancesDirective, ImageModalComponent, MarkdownImageDirective],
   template: `
     @if (post$ | async; as post) {
     <div class="py-8">
@@ -37,14 +36,6 @@ import { MarkdownImageDirective } from '../../directives/markdown-image.directiv
           </div>
         </div>
 
-        <!-- Featured image with modal capability -->
-        @if (post.attributes.coverImage) {
-          <app-blog-image
-            [src]="getCoverImage(post)"
-            [alt]="post.attributes.imageAlt || post.attributes.title"
-          ></app-blog-image>
-        }
-
         <div class="blog-content" appMarkdownImage>
           <analog-markdown [content]="post.content" />
         </div>
@@ -57,6 +48,7 @@ import { MarkdownImageDirective } from '../../directives/markdown-image.directiv
       [isOpen]="modalIsOpen"
       [imageUrl]="modalImageSrc"
       [imageAlt]="modalImageAlt"
+      [isErrorImage]="modalIsErrorImage"
       (closed)="closeModal()"
     ></app-image-modal>
     }
@@ -71,6 +63,7 @@ export default class BlogPostComponent implements OnInit, AfterViewChecked, OnDe
   modalIsOpen = false;
   modalImageSrc = '';
   modalImageAlt = '';
+  modalIsErrorImage = false;
   private imageClickSubscription?: Subscription;
 
   getCoverImage(post: any): string {
@@ -93,6 +86,7 @@ export default class BlogPostComponent implements OnInit, AfterViewChecked, OnDe
         (event: ImageClickEvent) => {
           this.modalImageSrc = event.src;
           this.modalImageAlt = event.alt;
+          this.modalIsErrorImage = event.isError;
           this.modalIsOpen = true;
         }
       );

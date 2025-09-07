@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { getDefaultCdnImageUrl } from '../../utils/cdn-helper';
 import { CERTIFICATES, Certificate } from './data/certifications.data';
 
 @Component({
@@ -53,6 +54,6 @@ import { CERTIFICATES, Certificate } from './data/certifications.data';
 export class CertificationsComponent {
   certificates: Certificate[] = CERTIFICATES;
   onImgError(event: Event) {
-    (event.target as HTMLImageElement).src = '/assets/default-certificate.png';
+    (event.target as HTMLImageElement).src = getDefaultCdnImageUrl();
   }
 }

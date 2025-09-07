@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UrlService } from '../../services/url.service';
 
 @Component({
   selector: 'app-image-modal',
@@ -22,13 +21,15 @@ import { UrlService } from '../../services/url.service';
           </button>
 
           <!-- Only the img element itself will stop propagation -->
-          <img
-            [src]="imageUrl"
-            [alt]="imageAlt"
-            class="max-h-[80vh] max-w-[90%] md:max-w-[85%] lg:max-w-[80%] object-contain shadow-2xl rounded"
-            (click)="$event.stopPropagation()"
-            (error)="onImageError($event)"
-          />
+          <div class="modal-image-container">
+            <img
+              [src]="imageUrl"
+              [alt]="imageAlt"
+              class="max-h-[80vh] max-w-[90%] md:max-w-[85%] lg:max-w-[80%] object-contain shadow-2xl rounded"
+              [ngClass]="{'error-image': isErrorImage}"
+              (click)="$event.stopPropagation()"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -77,11 +78,60 @@ import { UrlService } from '../../services/url.service';
         opacity: 1;
       }
     }
+
+    /* Styles for error images */
+    .error-image {
+      min-width: 700px !important;
+      border: 2px dashed #e0e0e0 !important;
+      padding: 1rem !important;
+      background-color: #f8f8f8 !important;
+    }
+
+    .modal-image-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Responsive styles for error images on mobile */
+    @media (max-width: 768px) {
+      .error-image {
+        min-width: 375px !important;
+      }
+    }
   `]
 })
 export class ImageModalComponent implements OnDestroy {
-  @Input() isOpen = false;
-  @Input() imageUrl = '';
+  @Input() set isOpen(value: boolean) {
+    this._isOpen = value;
+    // Reset error status when modal is opened
+    if (value) {
+      this.isErrorImage = false;
+    }
+  }
+  get isOpen(): boolean {
+    return this._isOpen;
+  }
+  private _isOpen = false;
+
+  @Input() set isErrorImage(value: boolean) {
+    this._isErrorImage = value;
+  }
+  get isErrorImage(): boolean {
+    return this._isErrorImage;
+  }
+  private _isErrorImage = false;
+
+  @Input() set imageUrl(value: string) {
+    this._imageUrl = value;
+    // Reset error status when image URL changes
+    this.isErrorImage = false;
+  }
+  get imageUrl(): string {
+    return this._imageUrl;
+  }
+  private _imageUrl = '';
+
   @Input() imageAlt = '';
   @Output() closed = new EventEmitter<void>();
 
@@ -104,12 +154,5 @@ export class ImageModalComponent implements OnDestroy {
   close(): void {
     this.isOpen = false;
     this.closed.emit();
-  }
-
-  private urlService = inject(UrlService);
-
-  onImageError(event: Event): void {
-    const imgElement = event.target as HTMLImageElement;
-    imgElement.src = this.urlService.getNoImageUrl();
   }
 }

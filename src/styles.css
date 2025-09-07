@@ -29,6 +29,14 @@ h1 {
   margin-bottom: 0.5rem !important;
 }
 
+.error-image {
+  min-width: 375px !important;
+  max-width: 700px !important;
+  margin: 1rem auto !important;
+  border: 1px dashed #ccc !important;
+  padding: 1rem !important;
+}
+
 li {
   text-align: justify;
 }

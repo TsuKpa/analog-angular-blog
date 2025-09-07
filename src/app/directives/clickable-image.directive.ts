@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 export interface ImageClickEvent {
   src: string;
   alt: string;
+  isError: boolean;
 }
 
 @Directive({
@@ -33,7 +34,8 @@ export class ClickableImageDirective {
     const imgElement = this.el.nativeElement;
     ClickableImageDirective.imageClicked.next({
       src: imgElement.src,
-      alt: imgElement.alt || ''
+      alt: imgElement.alt || '',
+      isError: this.el.nativeElement.classList.contains('error-image')
     });
   }
 

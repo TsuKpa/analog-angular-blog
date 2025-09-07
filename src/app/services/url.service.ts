@@ -8,7 +8,7 @@ export class UrlService {
 
   // Default images
   private readonly defaultImage = 'background.png';
-  private readonly noImage = '404.svg';
+  private readonly noImage = 'error-image.svg';
 
   /**
    * Get a full CDN URL for an image
