@@ -25,6 +25,7 @@ import { ImageModalComponent } from '../../components/image-modal/image-modal.co
 import { ImageClickEvent } from '../../directives/clickable-image.directive';
 import { MarkdownImageDirective } from '../../directives/markdown-image.directive';
 import { getCdnImageUrl } from '../../utils/cdn-helper';
+import { TableOfContentsComponent } from '../../components/table-of-contents/table-of-contents.component';
 
 @Component({
   selector: 'app-blog-post',
@@ -36,6 +37,7 @@ import { getCdnImageUrl } from '../../utils/cdn-helper';
     UtterancesDirective,
     ImageModalComponent,
     MarkdownImageDirective,
+    TableOfContentsComponent,
   ],
   template: `
     @if (post$ | async; as post) {
@@ -56,6 +58,12 @@ import { getCdnImageUrl } from '../../utils/cdn-helper';
             {{ post.attributes.createdDate | date : 'mediumDate' }}
           </div>
         </div>
+
+        <!-- Title -->
+        <h1 class="text-4xl font-bold title">{{ post.attributes.title }}</h1>
+
+        <!-- Table of Contents -->
+        <app-table-of-contents [content]="post.content"></app-table-of-contents>
 
         <div class="blog-content" appMarkdownImage>
           <analog-markdown [content]="post.content" />
@@ -191,16 +199,16 @@ export default class BlogPostComponent
             }
 
             const {
-              attributes: { 
-                title, 
-                description, 
+              attributes: {
+                title,
+                description,
                 coverImage,
                 photo,  // Add photo field as another possible image source
-                createdDate, 
-                lastmod, 
-                authors, 
-                tags, 
-                canonical_url 
+                createdDate,
+                lastmod,
+                authors,
+                tags,
+                canonical_url
               },
             } = post;
 
@@ -209,10 +217,10 @@ export default class BlogPostComponent
             // Otherwise use the current URL as canonical
             const postUrl = `${this.metaTagService.siteUrl}/blog/${currentSlug}`;
             const canonicalUrl = canonical_url || postUrl;
-            
+
             // Try to find an image for the blog post, with fallbacks
             const postImage = coverImage || photo;
-            
+
             // Default logo for publisher
             const publisherLogo = getCdnImageUrl('background.png');
 

@@ -27,8 +27,6 @@ publish: true
 
 ![DEPLOY LARAVEL PROJECT TO AMAZON EC2](https://gbengaoni.com/images/1__cHw6zbAivDFI__aZkeN1mjg.png "DEPLOY LARAVEL PROJECT TO AMAZON EC2")
 
-# Deploy Laravel project to Amazon EC2
-
 Hello guys, today i'll show you how to deploy Laravel project to Amazon EC2
 
 ## 1. Prerequisite
@@ -81,7 +79,7 @@ ssh -i "<examplekey.pem>" <username>@<EC2 Address>
     unzip <zipfilename.zip>
     ```
   
-### 2.3. Install PHP dependencies based on your project. For example
+### 2.3. Install PHP dependencies based on your project.
 
 ``` bash
 sudo add-apt-repository ppa:ondrej/php
@@ -231,7 +229,7 @@ ________________
 
 ## 4. (Optional) Fix some error when configuring
 
-### 4.1. By default, EC2 ubuntu not enabled php-fpm, run following command to enable
+### By default, EC2 ubuntu not enabled php-fpm, run following command to enable
 
 ``` bash
 sudo a2enmod proxy_fcgi setenvif
@@ -258,9 +256,9 @@ sudo service php<version>-fpm restart
 
 ________________
 
-# Setting EC2, RDS
+## 5. Setting EC2, RDS
 
-## 1. Create EC2
+### 5.1. Create EC2
 
 - AMI: Ubuntu
 - Instance type: t2.micro (free tier)
@@ -271,19 +269,19 @@ ________________
 
 ![Create EC2](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjo4ORXXG8UsLvbrMNTVv9IYoXnlTY116Wj40G36ew_iQ9oQX3Vo-cEYffkzOBXO8_5E9jPmszgx-fdlwCcO6i9IYVy8QHdv0lONWwdNMCvtuNUfUu9-FrmEQ_zv4I3x6SMO0E7V8zUDohdcGIwKaVuxB7vHmIwPhWYIuFRAis9rkWH1AgE4pOQiVV6PQ/s16000/ec22.PNG "Create EC2")
 
-## 2. Create Security Group
+### 5.2. Create Security Group
 
 We allow SSH, ICMP and TCP from anywhere and in Outbound we allow anything
   
 ![Create Security Group](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjzbsPELATr7bUKB6xhsy47k4DzYo7IbPprNVgtYzJX-lN-WsFGaC6aNNzoARMoAMrgtcd5HODQ5LUccO6DdI_BTbRfvNNuGU3DcPdblhDIP0N5BOTw7u-ewpDcqXRdJo_jd3raioSGDHdY-iWaNnzke70HiCFcqm6ShinnisHTz-fTmadxJXAh6xc4BA/s16000/sg.PNG "Create Security Group")
 
-## 3. Create Route table
+### 5.3. Create Route table
 
 Route the traffic to the internet gateway (igw)
 
 ![Create Route table](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiDUqWnSekDwV1PwS_kY4vTF0j3Yyo9dAJBA3Y7mYSSjESrkBheN3bP4KRKFRX5LmNSk4f1WjRaOx0n1r6ZoSTN1zAUkZm9RtlhYSYaHqdK5pd9llEMyDz92j8wpcbDcEaCGnt73pUOrVRpMlnQEu-DIO5q22bE0tZctj6pOKwZq0n50ZorLBiQZnxjGg/s16000/route-table.PNG "Create Route table")
 
-## 4. Create RDS
+### 5.4. Create RDS
 
 Create database for our application
 

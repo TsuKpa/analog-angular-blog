@@ -28,8 +28,6 @@ seo:
 publish: true
 ---
 
-# Environment variables and preview deploys get a boost
-
 Ever since [Deploy Previews](/products/build/) were [first introduced by Netlify in 2016](/blog/2016/07/20/introducing-deploy-previews-in-netlify/), users have been able to use them to see what the results of merging a pull request would be. They offer a valuable glimpse into the future and give insights and visibility to contributors and maintainers alike.
 
 Making Deploy Previews and their corresponding build logs visible has proven to be popular and empowering. But what if a build uses environment variables which we'd rather not make public, like API keys or other secrets? If we're not careful someone could create a pull request which exposes our environment variables as part of an automated Deploy Preview. We'd rather not have that.

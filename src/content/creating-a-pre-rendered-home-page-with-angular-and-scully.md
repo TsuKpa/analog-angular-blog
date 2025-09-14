@@ -24,8 +24,6 @@ seo:
 publish: true
 ---
 
-# Creating a Pre-rendered Home Page with Angular and Scully
-
 One of the fundamental elements of creating a site with the Jamstack architecture is pre-rendering content. This allows for faster delivery of your content, fewer security vulnerabilities, and immutable content. For this post, we will be storing static images in [Cloudinary](https://cloudinary.com/), a cloud service for images while also pre-rendering our assets. This means one less thing we have to manage ourselves or worry about. Yay!
 
 ## Cloud Content

@@ -1,0 +1,63 @@
+<div class="toc-container bg-gray-50 p-4 rounded-lg mt-8 mb-12 border border-gray-200"
+      [class.collapsed]="isCollapsed"
+      [class.sticky-toc]="isSticky">
+  <div class="flex justify-between items-center mb-2">
+    <div class="flex items-center gap-2">
+      <h2 class="text-lg font-semibold cursor-pointer" (click)="toggleCollapse()">Table of Contents</h2>
+      <!--<button
+        class="text-xs bg-gray-200 hover:bg-gray-300 p-1 rounded text-gray-700 flex items-center"
+        (click)="toggleSticky()"
+        [class.disabled]="isMobile"
+        title="Toggle sticky mode"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"
+              [class.text-black]="isSticky">
+          <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.927 5.927 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.922 5.922 0 0 1 1.013.16l3.134-3.133a2.772 2.772 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146z"/>
+        </svg>
+      </button> -- Temporary hide this feature -->
+    </div>
+    <button
+      class="text-gray-500 hover:text-gray-700 focus:outline-none transition-transform"
+      [class.rotate-180]="isCollapsed"
+      (click)="toggleCollapse()"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="toc-content" [class.hidden]="isCollapsed">
+    @if (hierarchicalTocItems.length > 0) {
+      <ul class="toc-list">
+        <ng-container *ngTemplateOutlet="tocItemTemplate; context: { $implicit: hierarchicalTocItems }"></ng-container>
+      </ul>
+    } @else {
+      <p class="text-sm text-gray-500 italic">No sections found in this article</p>
+    }
+  </div>
+
+  <!-- Recursive template for TOC items -->
+  <ng-template #tocItemTemplate let-items>
+    @for (item of items; track item.id) {
+      <li class="toc-item" [class.active-section]="activeId === item.id">
+        <a
+          [href]="'#' + item.id"
+          class="hover:text-gray-900 text-gray-700 text-sm py-1 inline-block transition-colors"
+          [class.text-black]="activeId === item.id"
+          [class.font-bold]="activeId === item.id"
+          [style.padding-left.px]="(item.level - 1) * 16"
+          (click)="scrollToSection($event, item.id)"
+        >
+          {{ item.text }}
+        </a>
+
+        @if (item.children && item.children.length > 0) {
+          <ul class="nested-toc-list">
+            <ng-container *ngTemplateOutlet="tocItemTemplate; context: { $implicit: item.children }"></ng-container>
+          </ul>
+        }
+      </li>
+    }
+  </ng-template>
+</div>

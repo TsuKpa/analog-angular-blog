@@ -25,8 +25,6 @@ seo:
 publish: true
 ---
 
-# Đôi lời chia sẽ sau khi hoàn thành chuyến 'phượt' dài 2 năm
-
 ![phuot](https://media-cdn-v2.laodong.vn/Storage/newsportal/2019/1/24/654161/Anh-Kn-Phuot-1.jpg)
 
 Xin chào! Mình là Nam. Hiện tại mình đang là lập trình viên Web tại [Green Space Solution](https://www.gss-sol.com/). Hôm nay mình muốn chia sẽ cho các bạn về chuyến __phượt__ 2 năm mà mọi thằng con trai đều phải có nghĩa vụ phải thực hiện. Vâng, chính là nó - [Nghĩa vụ quân sự](https://vi.wikipedia.org/wiki/Ngh%C4%A9a_v%E1%BB%A5_qu%C3%A2n_s%E1%BB%B1_t%E1%BA%A1i_Vi%E1%BB%87t_Nam).
@@ -47,13 +45,13 @@ Vậy thì, _Nghĩa vụ quân sự_ là gì?
 
 Vâng thưa quí vị và các bạn, mình nằm trong trường hợp 2, được gọi nhập ngũ vào lúc mình đi làm được 1 năm (25t) - Khi mà công việc đang trên đà phát triển. Mọi kế hoạch, dự định đều phải dời lại vào thời gian này (2 năm sau).
 
-### 1.1 Nơi tình yêu bắt đầu
+### 1.1. Nơi tình yêu bắt đầu
 
 Nhớ lại từ lúc học cấp 3, bản thân đã muốn vào quân đội nhưng do học dốt vả lại điểm thi và điều kiện thi vào khá cao (Mình dự định vào binh chủng đặc công 🤪) nên thôi. Bên cạnh đó thì cũng chọn ngành __Mạng máy tính và truyền thông__ - Nguyện vọng duy nhất của mình. Vì chơi game khá nhiều và muốn làm _Chuyên gia an ninh mạng_ (Nghe tên đã thấy ngầu lòi rồi 😀). Đã học dốt mà thích đú 😀. Sau khi thi ĐH xong (Lúc mình thi là 2013 vẫn còn thi riêng tốt nghiệp và ĐH nha) thì nghĩ mình đã tạch rồi, chuẩn bị đồ đi nghĩa vụ, gặp gỡ bạn bè chia tay, chia chân các kiểu thì lại đậu ĐH (_lol_)
 
 ![sinh-vien](https://nhaphoc.ueh.edu.vn/wp-content/uploads/2021/07/10-CN7A0561-1024x683.jpeg)
 
-#### Học Mạng mà không làm bên Mạng mà lại làm dev?
+***Học Mạng mà không làm bên Mạng mà lại làm dev?**
 
 Lý do đơn giản là mình là người hướng nội part-time với lại ít nhậu nên không theo ngành được.
 
@@ -63,7 +61,7 @@ Cũng như các bạn đồng trang lứa khác, học xong chương trình ĐH 
 
 Vào một ngày đẹp trời đang code dở tính năng như mọi ngày thì nghe tin như sét đánh ngang tai, có lệnh gọi khám sức khoẻ. Wow, đứng hình vài giây, mình nghĩ: 'Éc năm nay học xong rồi sao xin [giấy tạm hoãn](https://thuvienphapluat.vn/phap-luat/thoi-su-phap-luat/cach-xin-tam-hoan-nghia-vu-quan-su-nam-2023-mau-don-xin-tam-hoan-nghia-vu-quan-su-moi-nhat-25287.html)?'
 
-#### Trải nghiệm khi khám sức khoẻ và lúc nhập ngũ
+### 1.3. Trải nghiệm khi khám sức khoẻ và lúc nhập ngũ
 
 - __Khám sức khoẻ vòng xã__: Vòng này là vòng gửi xe nè, mấy bạn mà có điều kiện thì sẽ đi cửa sau ở vòng này nha (người ta gạch tên từ đầu luôn khỏi khám khỉ gì). Vòng này chỉ khám sơ bộ như là huyết áp, chiều cao, cân nặng,...
 
@@ -81,7 +79,7 @@ Lúc mình nói học ĐH xong thì ảnh đổi viết màu đỏ (Lúc này m�
 
 Lúc lên xe và đi vào đơn vị thì tâm trạng khá tò mò và hứng thú, khi vào cổng thì cứ nhìn các đồng chí vệ binh miết, khung cảnh thì chỉ toàn cây và cây nhưng mà rất trang nghiêm và sạch sẽ (lính quét mỗi ngày mà sao không sạch 😂)
 
-#### Một số tips về đồ dùng mang theo khi nhập ngũ
+***Một số tips về đồ dùng mang theo khi nhập ngũ**
 
 - Các bạn sẽ được cấp các đồ dùng như sau: Mũ cứng (nón cối), Quân phục (K03, bộ đồ màu xanh như hình phía trên ấy), đồ lót, ba lô, tất (vớ), giày vải, dây thắt lưng, khăn mặt.
 - Đồ dùng cần mang theo:
@@ -137,4 +135,4 @@ Năm hai thì mình được biên chế lên đánh máy mảng chính trị ch
 
 - Suy ngẫm nhiều hơn về cuộc sống: Trân trọng hơn từng khoảng khắc, có thể mình thấy nó bình thường nhưng với người khác nó đặc biệt, biết được tình yêu nước, yêu đồng đội, yêu nhân dân, yêu bộ đội là như nào.
   
-#### Yo, bài viết đến đây thôi, cảm ơn ai đó đã đọc được đến đây, có gì thắc mắc thì bình luận bên dưới nhé 💗💗💗💗💗💗
+**Yo, bài viết đến đây thôi, cảm ơn ai đó đã đọc được đến đây, có gì thắc mắc thì bình luận bên dưới nhé 💗💗💗💗💗💗**

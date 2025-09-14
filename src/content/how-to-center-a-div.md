@@ -23,11 +23,7 @@ seo:
 publish: true
 ---
 
-# How to center a div 😄
-
 ![background](https://images.headlines.pw/topnews-2017/imgs/71/49/7149225247bfd8cb6d0b555bb9d160ab188cf605_640_397.jpg)
-
-#### There are many way to center a div
 
 ## 1. Using flexbox
 

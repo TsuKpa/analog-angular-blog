@@ -24,13 +24,11 @@ seo:
 publish: true
 ---
 
-# Interview #1 Kinh nghiệm phỏng vấn của chú bộ đội sau 2 năm nhập ngũ 😄
-
 ![background](https://d9akteslg4v3w.cloudfront.net/blog/images/interview-1/1.jpg)
 
 Sau 2 năm nhập ngũ thì mình có thêm được 2 năm làm việc ở 1 công ty outsource, ở đây thì mình học được khá nhiều kiến thức, nhưng do tình hình kinh tế hiện tại thì phải xa nơi này. Lúc này hành trình tìm việc của mình mới bắt đầu, mình cũng có đúc kết lại 1 số trải nghiệm như sau:
 
-### 1. Các kiểu phỏng vấn ở các công ty
+## 1. Các kiểu phỏng vấn ở các công ty
 
 Thường thì các công ty sẽ phỏng vấn qua 3 bước:
   - Bước 1: Phỏng vấn với HR
@@ -66,16 +64,16 @@ Tuy nhiên do quy mô công ty là nhỏ hay lớn thì đều có các bước 
 - Rồi có công ty mình cảm thấy ổn nhất thì lại tạch, còn công ty phỏng vấn chơi chơi thì lại pass chả hiểu sao :D
 - Phỏng vấn xong thấy mấy chị HR nhiệt tình vãi chưởng, nhưng tạch thì lại nạnh nùng :D, thôi thì ai cũng có nhiệm vụ và khó khăn của mình mà, nên thôi phải phù hợp với hoàn cảnh của em thì em mới làm chứ không phải làm khó dễ gì mấy chị đâu nên mấy chị có đọc được thì bỏ qua cho em nha.
 
-### 2. Các kinh nghiệm phỏng vấn
+## 2. Các kinh nghiệm phỏng vấn
 
-#### 2.1 Kỹ năng cứng
+### 2.1. Kỹ năng cứng
 ![background](https://d9akteslg4v3w.cloudfront.net/blog/images/interview-1/3.jpg)
 - Ôn luyện kiến thức phù hợp (Ví dụ JD là NodeJS thì nên ôn mọi thứ liên quan đến backend, optimize database, thiết kế hệ thống)
 - Nắm vững những gì đã ghi trong CV
 - Cày leetcode, thiết kế hệ thống, IQ nếu cần
 - Nếu chưa có kinh nghiệm thì nên làm thêm workshop, open source project,.. và show ra cho nhà tuyển dụng thấy.
 
-#### 2.2. Kỹ năng mềm
+### 2.2. Kỹ năng mềm
 ![background](https://d9akteslg4v3w.cloudfront.net/blog/images/interview-1/4.jpg)
 - Có mindset là chào hàng bản thân mình - vì phỏng vấn là mua-bán giữa mình với doanh nghiệp: 
   - Show ra những gì mình mạnh, kinh nghiệm, kỹ năng giải quyết vấn đề
@@ -94,7 +92,7 @@ Tuy nhiên do quy mô công ty là nhỏ hay lớn thì đều có các bước 
 - **Gần cuối buổi phỏng vấn thì nên hỏi feedback của người phỏng vấn về mình như thế nào, cần cải thiện gì, để rút kinh nghiệm cho lần sau**
 - CV: Nên để dự án có công nghệ mà công ty đang cần vào, chém cũng được, vai trò mình làm gì trong dự án đó, techstack, teamsize; Khoảng thời gian từ mới nhất đến cũ nhất, mới nhất để trước. Kinh nghiệm làm việc để lên trên đầu, mấy cái không liên quan đến công việc thì bỏ ra (Giới tính, năm sinh, sở thích, hoạt động tình nguyện,...)
 
-#### 2.3. Các câu hỏi thường gặp
+### 2.3. Các câu hỏi thường gặp
 
 ![background](https://d9akteslg4v3w.cloudfront.net/blog/images/interview-1/5.jpg)
 

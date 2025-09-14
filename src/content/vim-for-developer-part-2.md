@@ -25,13 +25,11 @@ seo:
 publish: true
 ---
 
-# Vim và lập trình viên phần II (Vscode extension)
-
 Chào các bạn, khi đã là một lập trình viên lâu năm (:v) thì chắc ai cũng sẽ biết đến **Vim** Một editor nổi tiếng cực nhẹ và đặc biệt là không cần sử dụng chuột. Vim hỗ trợ hầu hết các plugin hỗ trợ lập trình như các **IDE** khác. **Vậy tại sao chúng ta không dùng Vim?**
 
 ![intro](https://img-9gag-fun.9cache.com/photo/axoW2BL_460s.jpg)
 
-### Vì nó khó sử dụng :smile:
+**Vì nó khó sử dụng :smile:**
 Thực sự mà nói thì việc config plugin cũng mất kha khá thời gian vì phải google rồi copy từng dòng vào file .vimrc sau đó test xem nó chạy không,... Nhưng một khi đã có file config của riêng mình rồi thì việc cài đặt khá là nhanh, nhất là khi remote lên server và chỉnh sửa gì đó.
 
 Ngoài ra **Vim** còn bonus cho chúng ta khả năng code tốc độ bàn thờ bởi chỉ sử dụng bàn phím (có thể youtube xem các lão làng coder múa phím)
@@ -59,7 +57,7 @@ Cú pháp như sau:
 
 ![ds](https://1.bp.blogspot.com/-Sfdg1nXkqXo/XhtIrpfdznI/AAAAAAAACC8/Xyfi6ERNawgF5NhM3XD0naAygSaQfx7UgCEwYBhgL/s640/ds.gif)
 
-#### 1.2 Change surround
+#### 1.2. Change surround
 
 Cú pháp như sau:
 

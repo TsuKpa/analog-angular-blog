@@ -21,8 +21,6 @@ seo:
 publish: true
 ---
 
-# Blog tâm trạng kết thúc 2024, bắt đầu 2025 cho một cơ hội mới
-
 ![background](https://d9akteslg4v3w.cloudfront.net/blog/images/goku.jpg)
 
 #1 Hôm nay tự dưng có hứng học lại Java và Spring Boot vì mình vừa apply vị trí ở công ty bạn đồng nghiệp vừa được nhận. Tự hỏi bản thân vì sao mình lại không thích Java lâu như vậy, và khi bắt tay vào code thử vài dòng thì mới bừng tỉnh là nó vẫn code như mấy ngôn ngữ khác thôi. Thực ra là do cái máy mình hồi đi học lúc đó quá là chậm chạp dẫn tới ức chế thời gian dài nên mình không thích Java. Haha chuyện đơn giản thế mà không nghĩ ra, đúng là chẻ chou.

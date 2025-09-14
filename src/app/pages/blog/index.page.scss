@@ -1,4 +1,42 @@
 /* Blog Post Page Styles */
+.title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #111827;
+  line-height: 1.5;
+}
+
+/* Table of Contents styles */
+:host ::ng-deep .toc-container {
+  position: relative;
+  transition: all 0.3s ease;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+:host ::ng-deep .toc-container:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+:host ::ng-deep .blog-content h1,
+:host ::ng-deep .blog-content h2,
+:host ::ng-deep .blog-content h3,
+:host ::ng-deep .blog-content h4,
+:host ::ng-deep .blog-content h5,
+:host ::ng-deep .blog-content h6 {
+  scroll-margin-top: 80px; /* Adjust as needed for your header height */
+}
+
+/* Highlighted header animation */
+:host ::ng-deep .highlight-header {
+  animation: headerHighlight 1.5s ease-out;
+}
+
+@keyframes headerHighlight {
+  0% { background-color: rgba(0, 0, 0, 0.1); }
+  100% { background-color: transparent; }
+}
 
 /* Handle images in Markdown */
 :host ::ng-deep img {
@@ -37,6 +75,7 @@
       margin-top: 2rem;
       margin-bottom: 1rem;
       color: #111827;
+      line-height: 1.5;
     }
 
     h2 {
@@ -152,7 +191,7 @@
       list-style-type: disc;
       margin-block-start: 1em;
       margin-block-end: 1em;
-      padding-inline-start: 40px;
+      padding-inline-start: 20px;
       unicode-bidi: isolate;
     }
 

@@ -25,8 +25,6 @@ seo:
 publish: true
 ---
 
-# Mình đã thi chứng chỉ AWS Solution Architect Associate (SAA-C03) như thế nào
-
 ![https://tsukpa-docs.s3.ap-southeast-1.amazonaws.com/blog/images/saa.png](https://tsukpa-docs.s3.ap-southeast-1.amazonaws.com/blog/images/saa.png)
 
 Xin chào mọi người, hôm nay mình sẽ chia sẽ với mọi người về quá trình chuẩn bị và thi chứng chỉ **AWS Solution Architect Associate (SAA-C03)**, giúp mọi người tự tin hơn trong con đường chinh phục chứng chỉ này.

@@ -1,0 +1,35 @@
+.sticky-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Add subtle shadow for visual separation
+  backdrop-filter: blur(5px); // Optional: adds a slight blur effect for a modern look
+
+  // Default state - visible
+  transform: translateY(0);
+
+  // Animation states controlled by JavaScript
+  &.header-hidden {
+    transform: translateY(-100%);
+  }
+}
+
+// Add padding to body to prevent content from jumping when header becomes fixed
+:host {
+  display: block;
+  height: 64px; // Match the height of your header (h-16 = 64px)
+}
+
+// Add padding to the top of the page to account for the fixed header
+:host-context(body) {
+  padding-top: 64px;
+}
+
+// When at the top of the page, remove shadow to blend with content
+:host-context(body:not(.scrolled)) .sticky-header {
+  box-shadow: none;
+}

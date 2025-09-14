@@ -25,8 +25,6 @@ seo:
 publish: true
 ---
 
-# Getting Started with Strapi: A Headless CMS Revolution
-
 ![https://d2zv2ciw0ln4h1.cloudfront.net/uploads/Capture_d_ecran_2020_10_07_a_13_27_46_3bf18c57bf.png](https://d2zv2ciw0ln4h1.cloudfront.net/uploads/Capture_d_ecran_2020_10_07_a_13_27_46_3bf18c57bf.png)
 
 **Strapi** is a powerful open-source headless **Content Management System (CMS)** that enables developers to build dynamic, content-driven websites and applications. With its user-friendly interface and extensive customization options, **Strapi** has gained popularity among developers looking for a flexible and scalable **CMS** solution. In this guide, we'll walk you through the basics of **Strapi** and how to get started with it.

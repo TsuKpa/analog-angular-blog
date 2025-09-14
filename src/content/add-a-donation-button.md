@@ -28,8 +28,6 @@ seo:
 publish: true
 ---
 
-# Add a Donation Button & Start Accepting Money On Jamstack Sites
-
 Taking donations is a fast & powerful way to take in money on your website. Whether you’re a non-profit or an indie creator, get started with Stripe in minutes!
 
 We recently teamed up again on _Learn With Jason_ to [build a Jamstack site with a donation button](https://www.learnwithjason.dev/accept-donations-on-jamstack-sites). In this tutorial, we’ll walk through the process of adding a donate button to a Jamstack site and processing donations securely through Stripe Checkout.
@@ -40,11 +38,11 @@ We recently teamed up again on _Learn With Jason_ to [build a Jamstack site with
 - Source code: <https://github.com/jlengstorf/stripe-donations>
 - [Deploy your own copy to Netlify](https://app.netlify.com/start/deploy?repository=https://github.com/jlengstorf/stripe-donations&utm_source=blog&utm_medium=stripe-donations-jl&utm_campaign=devex)
 
-## Watch this tutorial in video format
+## 1. Watch this tutorial in video format
 
 If you prefer video, this tutorial is also available as [an egghead lesson](https://jason.af/egghead/stripe-donations).
 
-## Create a donation product on Stripe
+## 2. Create a donation product on Stripe
 
 To get started, we need to create a product on Stripe that represents the donation.
 
@@ -58,13 +56,13 @@ To get started, we need to create a product on Stripe that represents the donati
 
 Keep the SKU handy, because we’ll need it in a minute.
 
-## Get your Stripe publishable key
+## 3. Get your Stripe publishable key
 
 Next, we need our Stripe publishable key, which tells Stripe which account the donations should be sent to. Go to [your API keys](https://dashboard.stripe.com/test/apikeys) and copy the publishable key.
 
 ![API keys section of the Stripe dashboard](https://cdn.netlify.com/17e9caa9fca890dedfd4f6ddb9266212b2f3ba13/a7097/img/blog/stripe-api-keys.png)
 
-## Add a button to your site
+## 4. Add a button to your site
 
 Next, we need to add the HTML to our page that displays the donation button, as well as a div to display error messages in case something goes wrong.
 
@@ -86,7 +84,7 @@ Update `index.html`
     </main>
 ```
 
-## Include Stripe.js and listen for button clicks
+## 5. Include Stripe.js and listen for button clicks
 
 Next, we need to add the JavaScript that initializes Stripe and sends the user to Checkout for payment when they click the donate button.
 
@@ -133,7 +131,7 @@ This code will:
 1. Add an event listener to the button
 1. Redirect to Stripe Checkout with the donation SKU
 
-## Create a success page
+## 6. Create a success page
 
 Our redirect code tells Stripe to send successful purchases to `success.html` — let’s create that:
 
@@ -159,7 +157,7 @@ Our redirect code tells Stripe to send successful purchases to `success.html` �
 </html>
 ```
 
-## Test the donation flow
+## 7. Test the donation flow
 
 All that’s left to do now is test things out!
 
@@ -171,11 +169,11 @@ Alternatively, you can [deploy the site to Netlify](https://docs.netlify.com/#ge
 
 Pay using one of Stripe’s [test credit cards](https://stripe.com/docs/testing#cards) and you’ll be redirected to the success page.
 
-## Go live and start accepting real donations
+## 8. Go live and start accepting real donations
 
 To go live, change your Stripe account into [live mode](https://stripe.com/docs/keys#test-live-modes), replace the test key with your production publishable key, then deploy the site and you’re in business!
 
-## What to do next
+## 9. What to do next
 
 For more information, check out [the source code](https://github.com/jlengstorf/stripe-donations) for this example or [deploy your own copy to Netlify](https://app.netlify.com/start/deploy?repository=https://github.com/jlengstorf/stripe-donations&utm_source=learnwithjason&utm_medium=github&utm_campaign=devex) and give it a try!
 

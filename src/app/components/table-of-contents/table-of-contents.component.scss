@@ -1,0 +1,72 @@
+.toc-list {
+  list-style-type: none;
+  padding-left: 0;
+  max-height: 50vh;
+  overflow-y: auto;
+
+  .toc-item {
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: translateX(2px);
+    }
+
+    &.active-section {
+      font-weight: 600;
+    }
+  }
+}
+
+.nested-toc-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.collapsed {
+  box-shadow: none !important;
+}
+
+.hidden {
+  display: none;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+button {
+  transition: transform 0.3s ease;
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.sticky-toc {
+  position: sticky;
+  top: 20px;
+  z-index: 10;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+
+  @media (max-width: 768px) {
+    position: static !important;
+    top: 0;
+    max-height: 300px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+}
+
+/* Highlighted header animation - use black instead of blue */
+:host ::ng-deep .highlight-header {
+  animation: headerHighlight 1.5s ease-out;
+}
+
+@keyframes headerHighlight {
+  0% { background-color: rgba(0, 0, 0, 0.1); }
+  100% { background-color: transparent; }
+}

@@ -25,15 +25,13 @@ seo:
 publish: true
 ---
 
-# How to Revoke STS Credentials for Leaked EC2 Instances
-
 ![https://tsukpa-docs.s3.ap-southeast-1.amazonaws.com/blog/images/aws_sts_ec2.png](https://tsukpa-docs.s3.ap-southeast-1.amazonaws.com/blog/images/aws_sts_ec2.png)
 
 This section will delve into the critical steps to take when an EC2 instance is compromised and its STS credentials are at risk. I'll cover methods to identify compromised instances, extract potential STS credentials, and most importantly, revoke those credentials to mitigate further damage.
 
-## Part 1: Understanding STS
+## 1. Part 1: Understanding STS
 
-### What is STS?
+### 1.1. What is STS?
 
 ![https://www.bitslovers.com/wp-content/uploads/sites/5/2022/10/20221026_054349_0000.png](https://www.bitslovers.com/wp-content/uploads/sites/5/2022/10/20221026_054349_0000.png)
 
@@ -41,7 +39,7 @@ This section will delve into the critical steps to take when an EC2 instance is 
 
 Unlike IAM, which manages long-term credentials and permissions, STS focuses on generating **short-lived** credentials for specific use cases.
 
-### Use Cases for STS
+### 1.2. Use Cases for STS
 
 STS offers a wide range of applications within the AWS ecosystem:
 
@@ -51,13 +49,13 @@ STS offers a wide range of applications within the AWS ecosystem:
 * Used to access AWS resources
 * Requested by an identity *(AWS or External)*
 
-## Part 2: What happens if an EC2 instance is taken control by someone else?
+## 2. Part 2: What happens if an EC2 instance is taken control by someone else?
 
 The best practice for running AWS Resource is using [IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html). This function attaches an IAM Role for a resource and provides them permission to access other AWS resources instead of using [IAM Credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)
 
 In this blog, I will show you how to get credentials from an EC2 instance and use them with the [cli](https://aws.amazon.com/vi/cli/).
 
-### How to get credentials from EC2 instance
+### 2.1. How to get credentials from EC2 instance
 
 In this example, for simple i created a EC2 instance in a public subnet and allow anything in the security group.
 
@@ -91,7 +89,7 @@ The credentials is something like this
 
 After get credentials, you can passing it into the local credentials of the AWS CLI using command `aws configure`. Then you can use [Terraform](https://www.terraform.io/) to create a maximum instance type for mining bitcoin 👿.
 
-### Solutions
+### 2.2. Solutions
 
 `Remember, you can not manually invalidate temporary credentials`. They only expire when they expire. But because changing the permissions policy affects everyone, you can add a condition element to it denying anyone access to AWS who assumed the role before a certain date and time.
 
