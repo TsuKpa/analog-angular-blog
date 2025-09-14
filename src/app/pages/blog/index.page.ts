@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, computed, inject } from '@angular/core';
+import { Component, OnInit, signal, computed, inject, DOCUMENT } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { injectContentFiles } from '@analogjs/content';
 
@@ -110,6 +110,7 @@ import { getCdnImageUrl } from '../../utils/cdn-helper';
 })
 export default class BlogComponent implements OnInit {
   private readonly metaTagService = inject(MetaTagService);
+  private readonly document = inject(DOCUMENT);
 
   ngOnInit() {
     const blogUrl = `${this.metaTagService.siteUrl}/blog`;
@@ -164,8 +165,8 @@ export default class BlogComponent implements OnInit {
 
   renderCollectionSchema() {
     const id = 'blog-collection-schema';
-    if (!document.getElementById(id)) {
-      const script = document.createElement('script');
+    if (!this.document.getElementById(id)) {
+      const script = this.document.createElement('script');
       script.id = id;
       script.type = 'application/ld+json';
       script.text = JSON.stringify({
@@ -191,7 +192,7 @@ export default class BlogComponent implements OnInit {
           })),
         },
       });
-      document.head.appendChild(script);
+      this.document.head.appendChild(script);
     }
   }
 

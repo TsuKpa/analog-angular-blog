@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-image-modal',
@@ -102,6 +103,7 @@ import { CommonModule } from '@angular/common';
   `]
 })
 export class ImageModalComponent implements OnDestroy {
+  private document = inject(DOCUMENT);
   @Input() set isOpen(value: boolean) {
     this._isOpen = value;
     // Reset error status when modal is opened
@@ -137,12 +139,12 @@ export class ImageModalComponent implements OnDestroy {
 
   constructor() {
     // Add event listener for Escape key
-    document.addEventListener('keydown', this.handleKeyDown.bind(this));
+    this.document.addEventListener('keydown', this.handleKeyDown.bind(this));
   }
 
   ngOnDestroy() {
     // Clean up event listener
-    document.removeEventListener('keydown', this.handleKeyDown.bind(this));
+    this.document.removeEventListener('keydown', this.handleKeyDown.bind(this));
   }
 
   handleKeyDown(event: KeyboardEvent): void {

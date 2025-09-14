@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,7 @@ export class HeaderComponent implements OnInit {
   lastScrollTop = 0;
   scrollThreshold = 5; // Minimum scroll amount before toggling header visibility
   isHeaderVisible = true;
+  private document = inject(DOCUMENT);
 
   ngOnInit() {
     // Initial setup
@@ -28,13 +30,13 @@ export class HeaderComponent implements OnInit {
   private handleScroll() {
     if (typeof window === 'undefined') return;
 
-    const currentScrollTop = window.scrollY || document.documentElement.scrollTop;
+    const currentScrollTop = window.scrollY || this.document.documentElement.scrollTop;
 
     // Add or remove scrolled class on body based on scroll position
     if (currentScrollTop > 10) {
-      document.body.classList.add('scrolled');
+      this.document.body.classList.add('scrolled');
     } else {
-      document.body.classList.remove('scrolled');
+      this.document.body.classList.remove('scrolled');
     }
 
     // Determine if we're scrolling enough to trigger a state change
@@ -59,7 +61,7 @@ export class HeaderComponent implements OnInit {
   }
 
   private updateHeaderState() {
-    const header = document.querySelector('.sticky-header') as HTMLElement;
+    const header = this.document.querySelector('.sticky-header') as HTMLElement;
     if (header) {
       if (this.isHeaderVisible) {
         header.classList.remove('header-hidden');

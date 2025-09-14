@@ -2,6 +2,7 @@ import { Component, OnInit, computed, inject } from '@angular/core';
 import { workshops, type WorkShop } from './data/workshop-data';
 import { WorkshopCardComponent } from '../../components/workshop-card/workshop-card.component';
 import { MetaTagService } from '../../services/meta.service';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-aws-workshops',
@@ -30,6 +31,7 @@ import { MetaTagService } from '../../services/meta.service';
 })
 export default class AwsWorkshopsComponent implements OnInit {
   private metaTagService = inject(MetaTagService);
+  private document = inject(DOCUMENT);
 
   ngOnInit() {
     const workshopsUrl = `${this.metaTagService.siteUrl}/aws-workshops`;
@@ -43,7 +45,7 @@ export default class AwsWorkshopsComponent implements OnInit {
     });
 
     // Add collection page structured data for workshops
-    const script = document.createElement('script');
+    const script = this.document.createElement('script');
     script.type = 'application/ld+json';
     script.text = JSON.stringify({
       '@context': 'https://schema.org',
@@ -67,7 +69,7 @@ export default class AwsWorkshopsComponent implements OnInit {
         }))
       }
     });
-    document.head.appendChild(script);
+    this.document.head.appendChild(script);
   }
 
   readonly sortedWorkshops = computed(() => {

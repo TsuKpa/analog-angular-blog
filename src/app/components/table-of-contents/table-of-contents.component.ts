@@ -1,6 +1,7 @@
-import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
 
 interface TocItem {
   id: string;
@@ -19,6 +20,7 @@ interface TocItem {
   styleUrls: ['./table-of-contents.component.scss']
 })
 export class TableOfContentsComponent implements OnInit, OnChanges, OnDestroy {
+  private document = inject(DOCUMENT);
   @Input() content = '';
   tocItems: TocItem[] = [];
   hierarchicalTocItems: TocItem[] = []; // Top-level items for display
@@ -97,12 +99,12 @@ export class TableOfContentsComponent implements OnInit, OnChanges, OnDestroy {
     // Try to find all heading elements that might match our IDs
     this.tocItems.forEach(item => {
       // First try by ID
-      let heading = document.getElementById(item.id);
+      let heading = this.document.getElementById(item.id);
 
       // If not found, try by matching text content
       if (!heading) {
         for (let i = 1; i <= 6; i++) {
-          Array.from(document.querySelectorAll(`h${i}`)).forEach(h => {
+          Array.from(this.document.querySelectorAll(`h${i}`)).forEach(h => {
             if (this.generateHeaderId(h.textContent || '') === item.id) {
               heading = h as HTMLElement;
             }
@@ -173,7 +175,7 @@ export class TableOfContentsComponent implements OnInit, OnChanges, OnDestroy {
   private extractHeadingsFromDOM(): void {
 
     // Find the blog content container
-    const blogContent = document.querySelector('.blog-content');
+    const blogContent = this.document.querySelector('.blog-content');
 
     if (!blogContent) {
       return;
@@ -342,13 +344,13 @@ export class TableOfContentsComponent implements OnInit, OnChanges, OnDestroy {
     event.preventDefault();
 
     // First try finding the element by its ID
-    let element = document.getElementById(id);
+    let element = this.document.getElementById(id);
 
     // If not found, try to find heading elements that might have the ID
     if (!element) {
       // Try all heading tags (h1-h6) that might match our generated ID
       for (let i = 1; i <= 6; i++) {
-        const headings = document.querySelectorAll(`h${i}`);
+        const headings = this.document.querySelectorAll(`h${i}`);
         // Convert NodeList to Array before using forEach
         Array.from(headings).forEach(heading => {
           // Check if this heading's text would generate our ID
