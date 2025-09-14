@@ -124,32 +124,7 @@ export default class BlogComponent implements OnInit {
     });
 
     // Add Blog Collection structured data (CollectionPage)
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'CollectionPage',
-      name: 'Blog - Articles on Web Development, AWS, and Technical Tutorials',
-      description:
-        'Explore articles on web development, AWS cloud services, and various technical topics.',
-      url: `${this.metaTagService.siteUrl}/blog`,
-      publisher: {
-        '@type': 'Person',
-        name: 'Tsukpa',
-        url: `${this.metaTagService.siteUrl}/about`,
-      },
-      mainEntity: {
-        '@type': 'ItemList',
-        itemListElement: this.posts.map((post, index) => ({
-          '@type': 'ListItem',
-          position: index + 1,
-          url: `${this.metaTagService.siteUrl}/blog/${post.slug}`,
-          name: post.attributes.title,
-          description: post.attributes.description,
-        })),
-      },
-    });
-    document.head.appendChild(script);
+    this.renderCollectionSchema();
 
     // Add author structured data
     this.metaTagService.addAuthorStructuredData(
@@ -186,6 +161,39 @@ export default class BlogComponent implements OnInit {
   readonly sortedPosts = computed(() => {
     return this.sortPosts(this.filteredPosts(), 'newest');
   });
+
+  renderCollectionSchema() {
+    const id = 'blog-collection-schema';
+    if (!document.getElementById(id)) {
+      const script = document.createElement('script');
+      script.id = id;
+      script.type = 'application/ld+json';
+      script.text = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: 'Blog - Articles on Web Development, AWS, and Technical Tutorials',
+        description:
+          'Explore articles on web development, AWS cloud services, and various technical topics.',
+        url: `${this.metaTagService.siteUrl}/blog`,
+        publisher: {
+          '@type': 'Person',
+          name: 'Tsukpa',
+          url: `${this.metaTagService.siteUrl}/about`,
+        },
+        mainEntity: {
+          '@type': 'ItemList',
+          itemListElement: this.posts.map((post, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            url: `${this.metaTagService.siteUrl}/blog/${post.slug}`,
+            name: post.attributes.title,
+            description: post.attributes.description,
+          })),
+        },
+      });
+      document.head.appendChild(script);
+    }
+  }
 
   filterByTag(tag: string) {
     this.activeTag.set(tag);
