@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
     setTimeout(() => this.updateHeaderState(), 0);
   }
 
-  @HostListener('window:scroll', ['$event'])
+  @HostListener('window:scroll')
   onWindowScroll() {
     this.handleScroll();
   }

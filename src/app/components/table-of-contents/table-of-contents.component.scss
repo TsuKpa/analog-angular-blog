@@ -3,6 +3,7 @@
   padding-left: 0;
   max-height: 50vh;
   overflow-y: auto;
+  overflow-x: hidden;
 
   .toc-item {
     transition: all 0.2s ease;

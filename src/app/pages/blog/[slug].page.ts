@@ -7,6 +7,7 @@ import {
   inject,
   AfterViewChecked,
   Injector,
+  signal,
 } from '@angular/core';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { RouterLink, Router, ActivatedRoute } from '@angular/router';
@@ -17,7 +18,7 @@ import {
 } from '@analogjs/content';
 import { runInInjectionContext } from '@angular/core';
 import PostAttributes from './data/post-attributes';
-import { tap, Subscription, map, switchMap, of, catchError } from 'rxjs';
+import { tap, Subscription, map, switchMap, of, catchError, finalize } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { isProduction } from '../../../environments/vite-env';
 import { MetaTagService, BlogPostMetaConfig } from '../../services/meta.service';
@@ -41,45 +42,89 @@ import { TableOfContentsComponent } from '../../components/table-of-contents/tab
   ],
   template: `
     @if (post$ | async; as post) {
-    <div class="py-8">
-      <article>
-        <!-- Tags and date header -->
-        <div class="flex justify-between items-center mb-6">
-          <div class="flex flex-wrap gap-2">
-            @for (tag of post.attributes.tags; track tag) {
-            <a
-              [routerLink]="['/blog/tag', tag]"
-              class="text-xs bg-gray-200 text-gray-800 hover:bg-gray-300 px-2 py-1 rounded transition-colors"
-              >#{{ tag }}</a
-            >
-            }
-          </div>
-          <div class="text-sm text-gray-600">
-            {{ post.attributes.createdDate | date : 'mediumDate' }}
-          </div>
+      <!-- Loading State with Skeleton -->
+      @if (isLoading()) {
+        <div class="py-8 animate-pulse">
+          <article>
+            <!-- Tags and date skeleton -->
+            <div class="flex justify-between items-center mb-6">
+              <div class="flex flex-wrap gap-2">
+                <div class="h-6 w-16 bg-gray-200 rounded"></div>
+                <div class="h-6 w-20 bg-gray-200 rounded"></div>
+                <div class="h-6 w-24 bg-gray-200 rounded"></div>
+              </div>
+              <div class="h-5 w-32 bg-gray-200 rounded"></div>
+            </div>
+
+            <!-- Title skeleton -->
+            <div class="mb-8 space-y-3">
+              <div class="h-10 bg-gray-200 rounded w-3/4"></div>
+              <div class="h-10 bg-gray-200 rounded w-1/2"></div>
+            </div>
+
+            <!-- Content skeleton -->
+            <div class="space-y-4 mt-8">
+              <div class="h-4 bg-gray-200 rounded w-full"></div>
+              <div class="h-4 bg-gray-200 rounded w-full"></div>
+              <div class="h-4 bg-gray-200 rounded w-5/6"></div>
+              <div class="h-4 bg-gray-200 rounded w-full"></div>
+              <div class="h-4 bg-gray-200 rounded w-4/5"></div>
+              <div class="h-64 bg-gray-200 rounded mt-6"></div>
+              <div class="h-4 bg-gray-200 rounded w-full mt-6"></div>
+              <div class="h-4 bg-gray-200 rounded w-full"></div>
+              <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+            </div>
+
+            <!-- Loading text -->
+            <div class="flex items-center justify-center mt-8 text-gray-500">
+              <svg class="animate-spin h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              <span>Loading blog post...</span>
+            </div>
+          </article>
+        </div>
+      } @else {
+        <div class="py-8">
+          <article>
+            <!-- Tags and date header -->
+            <div class="flex justify-between items-center mb-6">
+              <div class="flex flex-wrap gap-2">
+                @for (tag of post.attributes.tags; track tag) {
+                  <a
+                    [routerLink]="['/blog/tag', tag]"
+                    class="text-xs bg-gray-200 text-gray-800 hover:bg-gray-300 px-2 py-1 rounded transition-colors"
+                  >#{{ tag }}</a>
+                }
+              </div>
+              <div class="text-sm text-gray-600">
+                {{ post.attributes.createdDate | date : 'mediumDate' }}
+              </div>
+            </div>
+
+            <!-- Title -->
+            <h1 class="text-4xl font-bold title">{{ post.attributes.title }}</h1>
+
+            <!-- Table of Contents -->
+            <app-table-of-contents [content]="post.content"></app-table-of-contents>
+
+            <div class="blog-content" appMarkdownImage>
+              <analog-markdown [content]="post.content" />
+            </div>
+            <div [appUtterances]="isProd"></div>
+          </article>
         </div>
 
-        <!-- Title -->
-        <h1 class="text-4xl font-bold title">{{ post.attributes.title }}</h1>
-
-        <!-- Table of Contents -->
-        <app-table-of-contents [content]="post.content"></app-table-of-contents>
-
-        <div class="blog-content" appMarkdownImage>
-          <analog-markdown [content]="post.content" />
-        </div>
-        <div [appUtterances]="isProd"></div>
-      </article>
-    </div>
-
-    <!-- Global image modal for all images in blog content -->
-    <app-image-modal
-      [isOpen]="modalIsOpen"
-      [imageUrl]="modalImageSrc"
-      [imageAlt]="modalImageAlt"
-      [isErrorImage]="modalIsErrorImage"
-      (closed)="closeModal()"
-    ></app-image-modal>
+        <!-- Global image modal for all images in blog content -->
+        <app-image-modal
+          [isOpen]="modalIsOpen"
+          [imageUrl]="modalImageSrc"
+          [imageAlt]="modalImageAlt"
+          [isErrorImage]="modalIsErrorImage"
+          (closed)="closeModal()"
+        ></app-image-modal>
+      }
     }
   `,
   styleUrl: './index.page.scss',
@@ -92,6 +137,9 @@ export default class BlogPostComponent
   private readonly route = inject(ActivatedRoute);
   private readonly injector = inject(Injector);
   isProd = false;
+
+  // Loading state signal
+  isLoading = signal(true);
 
   // Will store all available blog posts from content files
   private allPosts: Array<{ slug: string; attributes: PostAttributes }> = [];
@@ -163,6 +211,7 @@ export default class BlogPostComponent
   private initPostObservable() {
     this.post$ = this.route.paramMap.pipe(
       map((params) => params.get('slug')),
+      tap(() => this.isLoading.set(true)),
       switchMap((currentSlug) => {
         if (!currentSlug) {
           console.warn('No slug parameter in URL, redirecting to 404');
@@ -190,6 +239,11 @@ export default class BlogPostComponent
           return injectContent<PostAttributes>();
         }).pipe(
           tap((post) => {
+            // Set loading to false as soon as we get the post data
+            if (post) {
+              this.isLoading.set(false);
+            }
+
             if (!post) {
               console.error(
                 'Post was found in content files but could not be loaded'
@@ -268,6 +322,7 @@ export default class BlogPostComponent
           }),
           catchError((error) => {
             console.error('Error loading blog post:', error);
+            this.isLoading.set(false);
             this.router.navigate(['/404']);
             return of(null);
           })
