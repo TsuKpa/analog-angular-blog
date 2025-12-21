@@ -16,7 +16,8 @@ export class MarkdownImageDirective implements AfterContentChecked {
     // Find all images in the content
     const images = this.el.nativeElement.querySelectorAll('img');
 
-    images.forEach((img: HTMLImageElement) => {
+    // Convert NodeList to Array for SSR compatibility
+    Array.from(images as NodeListOf<HTMLImageElement>).forEach((img) => {
       // Skip already processed images
       if (this.processedImages.has(img)) {
         return;
