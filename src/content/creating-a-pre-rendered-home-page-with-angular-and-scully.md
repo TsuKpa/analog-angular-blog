@@ -20,7 +20,7 @@ canonical_url: https://www.netlify.com/blog/2020/04/03/creating-a-pre-rendered-h
 seo:
   metadescription: >-
     Learn how to start transitioning Angular sites to the Jamstack. In this tutorial, we pre-render homepage content using Scully and store assets on the cloud. Get up and deployed in no time!
-  metatitle: Create Fast, Pre-rendered Pages in Angular using Scully - TsuKpa's Blog
+  metatitle: Create Fast, Pre-rendered Pages in Angular using Scully - NQNam's Blog
 publish: true
 ---
 

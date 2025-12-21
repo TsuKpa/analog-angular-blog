@@ -22,7 +22,7 @@ relatedposts:
   - Automate Order Fulfillment w/Stripe Webhooks & Netlify Functions
 seo:
   metatitle: >
-    How to: Donation Button to Start Accepting Money On Jamstack Sites TsuKpa's Blog
+    How to: Donation Button to Start Accepting Money On Jamstack Sites NQNam's Blog
   metadescription: >
     See how accepting donations is a fast &#x26; powerful way to make money on your website. Whether you’re a non-profit or an indie creator, learn how to get started with Stripe in minutes!
 publish: true

@@ -154,8 +154,8 @@ export default class HomeComponent implements OnInit {
 
     // Set basic meta tags
     this.metaTagService.updateMetaTags({
-      title: 'Tsukpa - Software Engineer, AWS Certified, Technical Writer',
-      description: 'Personal website of Tsukpa, sharing insights on software development, AWS, and technical tutorials.',
+      title: 'NQNam - Software Engineer, AWS Certified, Technical Writer',
+      description: 'Personal website of NQNam, sharing insights on software development, AWS, and technical tutorials.',
       url: homeUrl,
       canonical: homeUrl, // Set canonical URL
       type: 'website'
@@ -163,7 +163,7 @@ export default class HomeComponent implements OnInit {
 
     // Add author structured data
     this.metaTagService.addAuthorStructuredData(
-      'Tsukpa',
+      'NQNam',
       `${this.metaTagService.siteUrl}/about`,
       getCdnImageUrl('avatar-blog.jpg'),
       'Software Engineer, AWS Certified, Technical Writer',

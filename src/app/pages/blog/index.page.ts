@@ -129,7 +129,7 @@ export default class BlogComponent implements OnInit {
 
     // Add author structured data
     this.metaTagService.addAuthorStructuredData(
-      'Tsukpa',
+      'NQNam',
       `${this.metaTagService.siteUrl}/about`,
       getCdnImageUrl('avatar-blog.jpg'),
       'Software Engineer, AWS Certified, Technical Writer',
@@ -178,7 +178,7 @@ export default class BlogComponent implements OnInit {
         url: `${this.metaTagService.siteUrl}/blog`,
         publisher: {
           '@type': 'Person',
-          name: 'Tsukpa',
+          name: 'NQNam',
           url: `${this.metaTagService.siteUrl}/about`,
         },
         mainEntity: {

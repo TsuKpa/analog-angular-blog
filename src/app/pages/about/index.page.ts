@@ -66,8 +66,8 @@ export default class AboutPage implements OnInit {
     const aboutUrl = `${this.metaTagService.siteUrl}/about`;
 
     this.metaTagService.updateMetaTags({
-      title: 'About - Tsukpa - Software Developer & Technical Writer',
-      description: 'Learn more about Tsukpa, my skills, certifications, experience, and background as a software developer.',
+      title: 'About - NQNam - Software Developer & Technical Writer',
+      description: 'Learn more about NQNam, my skills, certifications, experience, and background as a software developer.',
       url: aboutUrl,
       canonical: aboutUrl, // Set canonical URL
       type: 'profile'
@@ -75,7 +75,7 @@ export default class AboutPage implements OnInit {
 
     // Add person structured data for the about page
     this.metaTagService.addAuthorStructuredData(
-      'Tsukpa',
+      'NQNam',
       aboutUrl,
       this.avatarUrl,
       'Software Engineer, AWS Certified, Technical Writer',

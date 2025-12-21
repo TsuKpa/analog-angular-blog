@@ -7,7 +7,7 @@ authors:
   - Nam Nguyen (TsuKpa)
 createdDate: 30 Mar, 2024
 lastmod: 2024-03-30T15:05:08.421Z
-photo: https://tsukpa-docs.s3.ap-southeast-1.amazonaws.com/blog/images/saa.png
+photo: https://docs.nqnam.dev/blog/images/saa.png
 tags:
   - VietNamese
   - AWS
@@ -25,7 +25,7 @@ seo:
 publish: true
 ---
 
-![https://tsukpa-docs.s3.ap-southeast-1.amazonaws.com/blog/images/saa.png](https://tsukpa-docs.s3.ap-southeast-1.amazonaws.com/blog/images/saa.png)
+![https://docs.nqnam.dev/blog/images/saa.png](https://docs.nqnam.dev/blog/images/saa.png)
 
 Xin chào mọi người, hôm nay mình sẽ chia sẽ với mọi người về quá trình chuẩn bị và thi chứng chỉ **AWS Solution Architect Associate (SAA-C03)**, giúp mọi người tự tin hơn trong con đường chinh phục chứng chỉ này.
 
@@ -39,7 +39,7 @@ Xin chào mọi người, hôm nay mình sẽ chia sẽ với mọi người v�
 
 ### 1.2. Chứng chỉ AWS là gì?
 
-![https://tsukpa-docs.s3.ap-southeast-1.amazonaws.com/blog/images/aws-certificates.png](https://tsukpa-docs.s3.ap-southeast-1.amazonaws.com/blog/images/aws-certificates.png)
+![https://docs.nqnam.dev/blog/images/aws-certificates.png](https://docs.nqnam.dev/blog/images/aws-certificates.png)
 
 AWS cung cấp một loạt các **chứng chỉ** chuyên sâu để kiểm chứng và chứng minh kỹ năng của các **chuyên gia công nghệ thông tin** trong việc sử dụng dịch vụ AWS. Các **chứng chỉ AWS** có thể được chia thành ba cấp độ chính:
 
@@ -121,7 +121,7 @@ Ngoài ra thì còn khá nhiều thứ mà mình chưa liệt kê ra hết, mìn
 
 ### 3.2. Những dịch vụ ít dùng (Nên biết chức năng)
 
-![https://tsukpa-docs.s3.ap-southeast-1.amazonaws.com/blog/images/AWS+Machine+Learning+-+Summary.png](https://tsukpa-docs.s3.ap-southeast-1.amazonaws.com/blog/images/AWS+Machine+Learning+-+Summary.png)
+![https://docs.nqnam.dev/blog/images/AWS+Machine+Learning+-+Summary.png](https://docs.nqnam.dev/blog/images/AWS+Machine+Learning+-+Summary.png)
 
 ### 3.3. Những từ khoá hay gặp
 
@@ -182,7 +182,7 @@ Ngoài ra thì còn khá nhiều thứ mà mình chưa liệt kê ra hết, mìn
 
 Để nâng cao trình độ của bản thân thì mình phải trang bị cho mình nhiều kỹ năng. Chứng chỉ cũng chỉ giúp mình bước đầu có cơ hội để làm việc, còn kinh nghiệm thực chiến mới là thứ quan trọng.
 
-![https://tsukpa-docs.s3.ap-southeast-1.amazonaws.com/blog/images/certificate-saa.png](https://tsukpa-docs.s3.ap-southeast-1.amazonaws.com/blog/images/certificate-saa.png)
+![https://docs.nqnam.dev/blog/images/certificate-saa.png](https://docs.nqnam.dev/blog/images/certificate-saa.png)
 
 Hy vọng bài viết này giúp bạn có cái nhìn tổng quan hơn về AWS Certificates. Nếu có thắc mắc vui lòng comment bên dưới cho mình biết với nhé 🙆‍♂️
 

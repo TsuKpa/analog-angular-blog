@@ -238,12 +238,12 @@ export default class BlogPostComponent
               dateModified: lastmod || createdDate || new Date().toISOString(),
               // Author information
               author: {
-                name: authors && authors.length > 0 ? authors[0] : 'Tsukpa Blog',
+                name: authors && authors.length > 0 ? authors[0] : 'NQNam Blog',
                 url: this.metaTagService.siteUrl
               },
               // Publisher information
               publisher: {
-                name: 'Tsukpa Blog',
+                name: 'NQNam Blog',
                 logo: publisherLogo
               }
             };

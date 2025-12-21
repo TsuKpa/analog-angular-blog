@@ -55,7 +55,7 @@ export default class AwsWorkshopsComponent implements OnInit {
       'url': workshopsUrl,
       'publisher': {
         '@type': 'Person',
-        'name': 'Tsukpa',
+        'name': 'NQNam',
         'url': `${this.metaTagService.siteUrl}/about`
       },
       'mainEntity': {

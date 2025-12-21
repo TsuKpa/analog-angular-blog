@@ -7,7 +7,7 @@ authors:
   - Nam Nguyen (TsuKpa)
 createdDate: 03 Aug, 2024
 lastmod: 2024-08-03T15:05:08.421Z
-photo: https://tsukpa-docs.s3.ap-southeast-1.amazonaws.com/blog/images/aws_sts_ec2.png
+photo: https://docs.nqnam.dev/blog/images/aws_sts_ec2.png
 tags:
   - AWS
   - STS
@@ -25,7 +25,7 @@ seo:
 publish: true
 ---
 
-![https://tsukpa-docs.s3.ap-southeast-1.amazonaws.com/blog/images/aws_sts_ec2.png](https://tsukpa-docs.s3.ap-southeast-1.amazonaws.com/blog/images/aws_sts_ec2.png)
+![https://docs.nqnam.dev/blog/images/aws_sts_ec2.png](https://docs.nqnam.dev/blog/images/aws_sts_ec2.png)
 
 This section will delve into the critical steps to take when an EC2 instance is compromised and its STS credentials are at risk. I'll cover methods to identify compromised instances, extract potential STS credentials, and most importantly, revoke those credentials to mitigate further damage.
 
@@ -59,7 +59,7 @@ In this blog, I will show you how to get credentials from an EC2 instance and us
 
 In this example, for simple i created a EC2 instance in a public subnet and allow anything in the security group.
 
-![https://tsukpa-docs.s3.ap-southeast-1.amazonaws.com/blog/images/aws-sts-ec2-sg.png](https://tsukpa-docs.s3.ap-southeast-1.amazonaws.com/blog/images/aws-sts-ec2-sg.png)
+![https://docs.nqnam.dev/blog/images/aws-sts-ec2-sg.png](https://docs.nqnam.dev/blog/images/aws-sts-ec2-sg.png)
 
 `Please specified needed policy with limited permissions in real world.`
 
@@ -117,7 +117,7 @@ And then you can go to the IAM Role then choose the last tab `Revoke sessions` a
 }
 ```
 
-![https://tsukpa-docs.s3.ap-southeast-1.amazonaws.com/blog/images/aws-sts-ec2-revoke.png](https://tsukpa-docs.s3.ap-southeast-1.amazonaws.com/blog/images/aws-sts-ec2-revoke.png)
+![https://docs.nqnam.dev/blog/images/aws-sts-ec2-revoke.png](https://docs.nqnam.dev/blog/images/aws-sts-ec2-revoke.png)
 
 After that, all temporary credentials will be invalid, you can go back to EC2, and now you can not access to the EC2 instance. For resolve this, we can stop and start ec2 instance again to get the new temporary credentials.
 

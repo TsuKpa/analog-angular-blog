@@ -65,7 +65,7 @@ export default defineConfig(({ mode }) => {
             },
           ],
           sitemap: {
-            host: 'https://v2.tsukpa.blog', // Don't forget to update your domain!
+            host: 'https://nqnam.dev', // Don't forget to update your domain!
           },
         },
       }),

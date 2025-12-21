@@ -130,6 +130,4 @@ Một số trick trong VSCodeVim mà mình thấy dễ sử dụng:
 
 Ngoài ra còn nhiều tính năng đang chờ bạn khám phá đó. Link extension [tại đây](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim) nhé.
 
-Đọc lại phần I tại đây nhé
-
-[https://tsukpa.netlify.app/blog/vim-for-developer-part-1](https://tsukpa.netlify.app/blog/vim-for-developer-part-1){:target="_blank"}
+Đọc lại phần I tại đây nhé: [link](/blog/vim-for-developer-part-1)

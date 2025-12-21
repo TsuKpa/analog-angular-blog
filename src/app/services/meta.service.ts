@@ -40,7 +40,7 @@ export class MetaTagService {
   private readonly defaultTwitterCard = 'summary_large_image';
   private readonly window = inject(DOCUMENT).defaultView as Window | null;
   public get siteUrl(): string {
-    return this.window?.location?.origin || 'https://v2.tsukpa.blog';
+    return this.window?.location?.origin || 'https://nqnam.dev';
   }
 
   updateMetaTags(config: MetaTagConfig): void {

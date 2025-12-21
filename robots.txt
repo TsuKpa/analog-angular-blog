@@ -10,4 +10,4 @@ User-agent: Googlebot-Image
 Allow: /assets/images/
 Allow: /content/images/
 
-Sitemap: https://v2.tsukpa.blog/sitemap.xml
+Sitemap: https://nqnam.dev/sitemap.xml
