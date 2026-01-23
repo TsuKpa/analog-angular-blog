@@ -47,6 +47,16 @@ Hồi tháng trước (12/2025) mới mua cái domain mới trên porkbun. Dứt
 
 ________________
 
+#DL 1. Năm nay cũng có đi chơi Vũng Sìn với nửa kia: Leo núi, chụp hình, checkin sống ảo, ăn uống này nọ, mua quà đem về, nói chung đủ cả. Lần đầu đi còn nhiều bỡ ngỡ nhưng nói chung cũng thành công phần nào, đạt được phần lớn kế hoạch. Hy vọng lần sau ghé mọi thứ trơn tru hơn. 
+
+![vungtau](https://ik.imagekit.io/tvlk/blog/2025/03/bai-bien-vung-tau-2-1024x682.jpeg?tr=q-70,c-at_max,w-1000,h-600)
+
+#DL 2. Company trip ở Khánh Hoà, có cái Vin Wonder khá xịn, tự nhiên đi xong cái nhớ lại hồi đó hay nghe đồn đi Đầm Sen hay Suối Tiên gì đó thấy cũng vui vui. Khi nào có dư dả sẽ dẫn gia đình đi chơi cho biết.
+
+![vinwonder](https://sgtravel.vn/wp-content/uploads/2020/11/tata-show-vinwonder-nha-trang-dulichchat-5.jpg)
+
+________________
+
 #6 Tâm trạng gì đây - các cô nuôi bệnh trong bệnh viện vui vẻ ra về chào mọi người khi được bác cho giấy về với niềm hớn hở như lúc đám lính cũ ngày ra quân - "chào nhá, tôi về trước nhá". Sự lạc quan của những người nuôi bệnh được hình thành khi họ đều chung chí hướng là đều mong muốn người thân khỏi bệnh.
 
 #7 Hôm nay đổi qua phòng rộng rãi mát mẽ hơn, do em nó mới được rút ống dẫn lưu dịch từ phổi, may mắn thoát khỏi phòng *"tử thần"* - bà chị giường đối diện chia sẽ. Chị ấy kể là lúc trước giường đó với kế bên có 2 người mất, mình nghe cũng hơi ố dè mà suy nghĩ lại thì kiểu như phòng theo dõi đặc biệt thì có người mất thì cũng là điều hiển nhiên. Nói thêm 1 xíu về chị này thì chị ấy có 3 đứa con trai. Kiếm 1 đứa con gái mà không được. Anh cả thì đang đi bộ đội, đứa thứ 2 thì đang là vận động viên thể dục dụng cụ - kiểu biểu diễn trên xà đơn (mình chả biết gọi là gì). Đứa út thì mới lớp 3 mà nó lanh, dễ thương vch, hỏi đội bóng nào cũng biết, cầu thủ nào cũng thuộc. Giờ ba nó bệnh nên hủy hết không có đi học gì nữa. Bà chị cũng dễ thương, hiền, hay cho đồ ăn với lại kêu đi nhận đồ từ thiện chung. Hy vọng anh trai mau khỏi. Vào đây xong mới hiểu: đúng kiểu có tiền cũng không có sức khỏe lại như cũ được. Trời kêu ai nấy dạ nhưng mà sức khoẻ là của mình, mình có thể rèn luyện nó được.
@@ -68,5 +78,7 @@ ________________
 ![Nam Mô Dược Sư Lưu Ly Quang Vương Phật](https://bchannel.vn/wp-content/uploads/2024/03/Nam-Mo-Duoc-Su-Luu-Ly-Quang-Vuong-Phat.png)
 
 #10 Tính ra thời gian phát bệnh từ lúc em nó sốt cho tới hiện tại là chưa tới 1 tháng. Mà trong 1 tháng này bệnh diễn biến rất nhanh. Lúc em nó sốt liên tục 1 tuần -> Chuyển nhập viện 175 -> Điều trị lao phổi, hút dịch -> Chẩn đoán UT -> Hoá trị UT trong 15 ngày (hiện tại lúc viết bài này là ngày thứ 8) -> Điều trị tiếp. Khoảng thời gian tiến triển rất nhanh, bộ bệnh này ai cũng nhanh vậy hay sao? Thôi thì còn nước còn tát, tới đâu hay tới đó.
+
+#11 Nay ngày 23.01.2026 em nó mới đẩy cái đầu bằng cái tông-đơ mà đồng chí cán bộ đơn vị nó mang theo, hớt 1 người mà 3 người phụ, người đi mua áo mưa, người cắt, người gội đầu. Tự nhiên cắt tóc xong cái nó tỉnh hẳn, ngồi nói chuyện, coi clip cười miết. Thôi thì phần tinh thần tạm ổn. Mô phật!
 
 Bài viết cũng khá dài rồi, cảm ơn ai đó đã đọc đến đây nhé. Mãi iu <3
