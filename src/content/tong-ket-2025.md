@@ -81,4 +81,12 @@ ________________
 
 #11 Nay ngày 23.01.2026 em nó mới đẩy cái đầu bằng cái tông-đơ mà đồng chí cán bộ đơn vị nó mang theo, hớt 1 người mà 3 người phụ, người đi mua áo mưa, người cắt, người gội đầu. Tự nhiên cắt tóc xong cái nó tỉnh hẳn, ngồi nói chuyện, coi clip cười miết. Thôi thì phần tinh thần tạm ổn. Mô phật!
 
+#12 Tính ra cu cháu mau khỏe, trộm vía là chịu thuốc, dần phục hồi và ăn uống lại được bình thường, có hôm còn tự đi xuống xung quanh khu để đi dạo, ăn uống, hài cái là thích đồ ăn dưới căn tin mặc dù mắc vcl, mình mua ở ngoài mang vào mà nó nói ko ăn được. -.-
+
+#13 Nay 27 tết - 14.2.2026. Sáng thèm cơm tấm mới đi kiếm quán để ăn mà đi vòng vòng gần hết nửa cái Tân Bình mới có quán. Mua xong về mới nhớ gần nhà có quán. Ăn xong thấy tiếc tiền ghê T.T Ăn uống ải đía xong thì dọn dẹp phòng trọ rồi chạy về quê.
+Tết kẹt xe thì thôi nhé mà được cái may mắn, chạy lê chạy lết tới khúc Trung Lương thì có người ta để biển "Đường tắt cuối đường quẹo trái". Mình mới chạy theo thì đúng là có đường tắt qua bên tuyến tránh Mỹ Tho thật. Huehuehue 🙃
+Chạy qua 1 xíu thì nhớ chỗ cầu Rạch Miễu 2 có đường mới nên đi thử. 1 mình 1 ngựa chạy phẻ re luôn. Đi quốc lộ 57c qua phà Tân Phú về tới Chợ Lách tới nhà là khoảng 4 tiếng cho hơn 100 cây ngày tết. Cũng nhanh ha.
+
+#14 Về quê ngồi ăn cơm mới nhớ hồi đầu tết đầu năm có gặp con rắn hổ lửa, người trong nhà ai cũng thấy mà không đập vì năm của nó, vài tháng sau cũng có gặp vài con rắn khác nữa mà cũng chỉ thả thôi. Y như rằng cuối năm có chuyện và trộm vía là cu cháu không sao, nếu đập mấy con rắn đó thì chắc..., Nam mô a di đà phật!
+
 Bài viết cũng khá dài rồi, cảm ơn ai đó đã đọc đến đây nhé. Mãi iu <3
