@@ -20,7 +20,7 @@ export interface BlogPost {
   standalone: true,
   imports: [RouterLink],
   template: `
-    <a [routerLink]="['/blog', post.slug]" class="rounded-lg bg-white text-gray-900 flex flex-col overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-300 ease-out h-full">
+    <a [routerLink]="['/blog', post.slug]" class="rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 flex flex-col overflow-hidden border border-gray-200 dark:border-gray-800 hover:shadow-lg dark:hover:shadow-black/40 transition-all duration-300 ease-out h-full">
       <div class="relative h-48 w-full overflow-hidden">
         <img
           [src]="getImageUrl(post.attributes.photo || post.attributes.coverImage)"
@@ -36,7 +36,7 @@ export interface BlogPost {
             [title]="cleanText(post.attributes.title)"
           >{{ post.attributes.title }}</h3>
           <time class="font-sans text-sm text-gray-500 mb-1 block">{{ post.attributes.createdDate || post.attributes.date }}</time>
-          <div class="prose max-w-full text-pretty font-sans text-sm text-gray-600">
+          <div class="prose dark:prose-invert max-w-full text-pretty font-sans text-sm text-gray-600 dark:text-gray-400">
             <p
               class="line-clamp-3"
               [title]="cleanText(post.attributes.description)"
@@ -49,7 +49,7 @@ export interface BlogPost {
         @if(post.attributes.tags?.length) {
           <div class="mt-4 flex flex-wrap gap-2">
             @for(tag of post.attributes.tags; track tag) {
-              <span class="inline-flex items-center rounded-md font-semibold bg-gray-100 text-gray-800 px-2 py-1 text-xs">{{ tag }}</span>
+              <span class="inline-flex items-center rounded-md font-semibold bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-2 py-1 text-xs">{{ tag }}</span>
             }
           </div>
         }

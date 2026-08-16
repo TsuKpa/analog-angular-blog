@@ -12,6 +12,36 @@
 /* check node_modules/prismjs/themes/ for the available themes */
 @import "prismjs/themes/prism-tomorrow.min.css";
 @import 'tailwindcss';
+
+/* Class-based dark mode: `dark:` utilities activate when <html> has .dark
+   (toggled by ThemeService / the pull-cord), instead of prefers-color-scheme. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* PullCord placement + rope colour, per theme. */
+:root {
+  --pullcord-top: 0px;
+  --pullcord-right: 6rem;
+  --pullcord-z: 60;
+  --pullcord-ink: rgba(30, 41, 59, 0.35);
+}
+.dark {
+  --pullcord-ink: rgba(255, 255, 255, 0.28);
+}
+/* On mobile the desktop nav is gone; align the cord with the hamburger icon
+   at the right edge (knob is centred in a 64px wrapper, so a small right
+   offset lands it near the ~1.75rem-from-edge menu button). */
+@media (max-width: 767px) {
+  :root {
+    --pullcord-right: 0.75rem;
+  }
+}
+
+/* Smooth the light/dark handoff on the big surfaces. */
+html,
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 html {
   height: 100%;
 }

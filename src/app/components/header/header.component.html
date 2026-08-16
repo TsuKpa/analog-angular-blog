@@ -1,9 +1,9 @@
-<header class="bg-white border-b border-gray-200 sticky-header">
+<header class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 sticky-header">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
       <!-- Logo/Brand -->
       <div class="flex items-center">
-        <a routerLink="/" class="text-xl font-bold text-gray-900 hover:text-gray-700 transition-colors">
+        <a routerLink="/" class="text-xl font-bold text-gray-900 dark:text-gray-100 hover:text-gray-700 dark:hover:text-white transition-colors">
           NQNam's Blog
         </a>
       </div>
@@ -12,30 +12,30 @@
       <nav class="hidden md:flex space-x-8">
         <a
           routerLink="/"
-          routerLinkActive="text-black font-semibold border-b-2 border-black"
+          routerLinkActive="text-black dark:text-white font-semibold border-b-2 border-black dark:border-white"
           [routerLinkActiveOptions]="{exact: true}"
-          class="text-gray-700 hover:text-black px-3 py-2 text-sm font-medium transition-colors"
+          class="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white px-3 py-2 text-sm font-medium transition-colors"
         >
           Home
         </a>
         <a
           routerLink="/blog"
-          routerLinkActive="text-black font-semibold border-b-2 border-black"
-          class="text-gray-700 hover:text-black px-3 py-2 text-sm font-medium transition-colors"
+          routerLinkActive="text-black dark:text-white font-semibold border-b-2 border-black dark:border-white"
+          class="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white px-3 py-2 text-sm font-medium transition-colors"
         >
           Blog
         </a>
         <a
           routerLink="/aws-workshops"
-          routerLinkActive="text-black font-semibold border-b-2 border-black"
-          class="text-gray-700 hover:text-black px-3 py-2 text-sm font-medium transition-colors"
+          routerLinkActive="text-black dark:text-white font-semibold border-b-2 border-black dark:border-white"
+          class="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white px-3 py-2 text-sm font-medium transition-colors"
         >
           AWS Workshops
         </a>
         <a
           routerLink="/about"
-          routerLinkActive="text-black font-semibold border-b-2 border-black"
-          class="text-gray-700 hover:text-black px-3 py-2 text-sm font-medium transition-colors"
+          routerLinkActive="text-black dark:text-white font-semibold border-b-2 border-black dark:border-white"
+          class="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white px-3 py-2 text-sm font-medium transition-colors"
         >
           About me
         </a>
@@ -45,7 +45,7 @@
       <div class="md:hidden">
         <button
           type="button"
-          class="text-gray-700 hover:text-gray-900 focus:outline-none focus:text-gray-900"
+          class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white focus:outline-none focus:text-gray-900 dark:focus:text-white"
           (click)="toggleMobileMenu()"
         >
           <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -57,36 +57,36 @@
 
     <!-- Mobile menu -->
     <div *ngIf="isMobileMenuOpen" class="md:hidden">
-      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200 dark:border-gray-800">
         <a
           routerLink="/"
-          routerLinkActive="bg-gray-100 text-black"
+          routerLinkActive="bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
           [routerLinkActiveOptions]="{exact: true}"
-          class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-black hover:bg-gray-100 rounded-md transition-colors"
+          class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
           (click)="closeMobileMenu()"
         >
           Home
         </a>
         <a
           routerLink="/blog"
-          routerLinkActive="bg-gray-100 text-black"
-          class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-black hover:bg-gray-100 rounded-md transition-colors"
+          routerLinkActive="bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
+          class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
           (click)="closeMobileMenu()"
         >
           Blog
         </a>
         <a
           routerLink="/aws-workshops"
-          routerLinkActive="bg-gray-100 text-black"
-          class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-black hover:bg-gray-100 rounded-md transition-colors"
+          routerLinkActive="bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
+          class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
           (click)="closeMobileMenu()"
         >
           AWS Workshops
         </a>
         <a
           routerLink="/about"
-          routerLinkActive="bg-gray-100 text-black"
-          class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-black hover:bg-gray-100 rounded-md transition-colors"
+          routerLinkActive="bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
+          class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
           (click)="closeMobileMenu()"
         >
           About me

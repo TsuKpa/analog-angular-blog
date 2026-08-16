@@ -17,8 +17,8 @@ import { getCdnImageUrl } from '../../utils/cdn-helper';
           class="inline-block bg-black text-white px-4 py-2 rounded-full text-sm font-semibold mb-4"
           >Blog</span
         >
-        <h1 class="text-5xl font-bold text-gray-900 mb-4">All Blog Posts</h1>
-        <p class="text-lg text-gray-600 max-w-xl mx-auto">
+        <h1 class="text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">All Blog Posts</h1>
+        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
           Explore all my blog posts about web development, AWS, and various
           technical topics.
         </p>
@@ -29,12 +29,12 @@ import { getCdnImageUrl } from '../../utils/cdn-helper';
         <div class="flex items-center flex-col gap-4">
           @if(availableTags().length > 0) {
           <div class="flex items-center gap-2">
-            <span class="text-sm font-medium text-gray-700">Tags:</span>
+            <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Tags:</span>
             <div class="flex flex-wrap gap-2">
               @for(tag of availableTags(); track tag) {
               <button
                 (click)="filterByTag(tag)"
-                class="inline-flex items-center rounded-md border border-gray-300 bg-white px-2 py-1 text-xs font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+                class="inline-flex items-center rounded-md border border-gray-300 dark:border-gray-800 bg-white dark:bg-gray-900 px-2 py-1 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
               >
                 {{ tag }}
               </button>
@@ -43,7 +43,7 @@ import { getCdnImageUrl } from '../../utils/cdn-helper';
           </div>
           } @if(activeTag()) {
           <div class="flex items-center gap-2">
-            <span class="text-sm text-gray-600">Filtered by:</span>
+            <span class="text-sm text-gray-600 dark:text-gray-400">Filtered by:</span>
             <span
               class="inline-flex items-center rounded-md bg-black text-white px-3 py-1 text-sm font-medium"
             >
@@ -80,13 +80,13 @@ import { getCdnImageUrl } from '../../utils/cdn-helper';
         }
       </div>
 
-      <div class="text-center mt-12 pt-8 border-t border-gray-200">
-        <p class="text-gray-600 mb-4">
+      <div class="text-center mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+        <p class="text-gray-600 dark:text-gray-400 mb-4">
           Found {{ sortedPosts().length }} blog posts
         </p>
         <a
           [routerLink]="['/']"
-          class="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+          class="inline-flex items-center px-6 py-3 border border-gray-300 dark:border-gray-800 text-base font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
         >
           <svg
             class="mr-2 -ml-1 w-5 h-5"

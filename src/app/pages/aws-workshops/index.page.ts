@@ -12,8 +12,8 @@ import { DOCUMENT } from '@angular/common';
     <div class="py-8">
       <div class="text-center mb-12">
         <span class="inline-block bg-black text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">AWS Workshops</span>
-        <h1 class="text-5xl font-bold text-gray-900 mb-4">Explore Hands-On Labs</h1>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Deepen your cloud skills with practical workshops on various AWS services and real-world scenarios.</p>
+        <h1 class="text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">Explore Hands-On Labs</h1>
+        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Deepen your cloud skills with practical workshops on various AWS services and real-world scenarios.</p>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

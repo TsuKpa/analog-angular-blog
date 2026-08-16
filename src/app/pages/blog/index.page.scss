@@ -348,3 +348,66 @@
     }
   }
 }
+
+/* ── Dark theme overrides ──────────────────────────────────────────────
+   The scss above hardcodes light-mode hex colours; these mirror them for
+   when <html> carries .dark (toggled by ThemeService / the pull-cord). */
+:host-context(.dark) {
+  .title {
+    color: #f3f4f6;
+  }
+
+  ::ng-deep .toc-container:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  ::ng-deep .analog-markdown {
+    color: #d1d5db;
+
+    h1,
+    h2,
+    h3 {
+      color: #f3f4f6;
+    }
+
+    h2 {
+      border-bottom-color: #374151;
+    }
+
+    a {
+      color: #70b8f7;
+    }
+
+    a:hover {
+      color: #9ecbfa;
+    }
+
+    blockquote {
+      color: #9ca3af;
+      border-color: #4b5563;
+      background-color: transparent;
+    }
+
+    code {
+      color: #e5e7eb;
+      background-color: #374151;
+    }
+
+    th {
+      background-color: #1f2937;
+      border-bottom-color: #4b5563;
+    }
+
+    td {
+      border-bottom-color: #374151;
+    }
+
+    tr:hover {
+      background-color: #1f2937;
+    }
+
+    table::after {
+      background: linear-gradient(to left, rgba(17, 24, 39, 0.8), transparent);
+    }
+  }
+}

@@ -12,8 +12,8 @@ import { CommonModule } from '@angular/common';
           class="inline-block bg-black text-white px-4 py-2 rounded-full text-sm font-semibold mb-4"
           >Contact</span
         >
-        <h1 class="text-5xl font-bold text-gray-900 mb-4">Get in Touch</h1>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
+        <h1 class="text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">Get in Touch</h1>
+        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-6">
           Want to chat? Just send me an
           <a
             class="text-blue-700 hover:underline"

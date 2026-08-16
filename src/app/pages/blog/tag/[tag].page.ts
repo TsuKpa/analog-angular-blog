@@ -25,10 +25,10 @@ import { MetaTagService } from '../../../services/meta.service';
           class="inline-block bg-black text-white px-4 py-2 rounded-full text-sm font-semibold mb-4"
           >Blog</span
         >
-        <h1 class="text-5xl font-bold text-gray-900 mb-4">
+        <h1 class="text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
           Posts Tagged "{{ tagName() }}"
         </h1>
-        <p class="text-lg text-gray-600 max-w-xl mx-auto">
+        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
           Showing all posts with the tag #{{ tagName() }}
         </p>
       </div>
@@ -40,20 +40,20 @@ import { MetaTagService } from '../../../services/meta.service';
         <app-blog-post-card [post]="post" />
         } @if (filteredPosts().length === 0) {
         <div class="col-span-full text-center py-12">
-          <p class="text-gray-500 text-xl">No posts found with this tag.</p>
+          <p class="text-gray-500 dark:text-gray-400 text-xl">No posts found with this tag.</p>
         </div>
         }
       </div>
 
-      <div class="text-center mt-12 pt-8 border-t border-gray-200">
-        <p class="text-gray-600 mb-4">
+      <div class="text-center mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+        <p class="text-gray-600 dark:text-gray-400 mb-4">
           Found {{ filteredPosts().length }} blog posts with tag #{{
             tagName()
           }}
         </p>
         <a
           [routerLink]="['/blog']"
-          class="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+          class="inline-flex items-center px-6 py-3 border border-gray-300 dark:border-gray-800 text-base font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
         >
           <svg
             class="mr-2 -ml-1 w-5 h-5"

@@ -24,10 +24,10 @@ import { getCdnImageUrl } from '../utils/cdn-helper';
           class="inline-block bg-black text-white px-4 py-2 rounded-full text-sm font-semibold mb-4"
           >Latest Blog Posts</span
         >
-        <h1 class="text-5xl font-bold text-gray-900 mb-4">
+        <h1 class="text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
           Check out my latest work
         </h1>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
           I've worked on a variety of projects, from simple websites to complex
           web applications. Here are my latest blog posts.
         </p>
@@ -62,11 +62,8 @@ import { getCdnImageUrl } from '../utils/cdn-helper';
         </a>
       </div>
 
-      <!-- Divider -->
-      <div class="my-12 border-t border-gray-200"></div>
-
       <!-- Quote Section -->
-      <div class="my-16 py-12 bg-gray-50 rounded-lg">
+      <div class="my-16 py-12 bg-gray-50 dark:bg-gray-900 rounded-lg border-t border-gray-200">
         <div class="max-w-4xl mx-auto px-6 text-center">
           <svg
             class="w-12 h-12 text-black-900 mx-auto mb-6"
@@ -78,26 +75,26 @@ import { getCdnImageUrl } from '../utils/cdn-helper';
             />
           </svg>
           <blockquote
-            class="text-2xl font-medium text-gray-900 mb-4 leading-relaxed"
+            class="text-2xl font-medium text-gray-900 dark:text-gray-100 mb-4 leading-relaxed"
           >
             "{{ randomQuote.text }}"
           </blockquote>
-          <cite class="text-lg text-gray-600 font-medium">
+          <cite class="text-lg text-gray-600 dark:text-gray-400 font-medium">
             — {{ randomQuote.author
             }}{{ randomQuote.profession ? ', ' + randomQuote.profession : '' }}
           </cite>
         </div>
       </div>
 
-      <div class="text-center my-12 pt-8 border-t border-gray-200">
+      <div class="text-center my-12 pt-8 border-t border-gray-200 dark:border-gray-800">
         <span
           class="inline-block bg-black text-white px-4 py-2 rounded-full text-sm font-semibold mb-4"
           >AWS Workshops</span
         >
-        <h1 class="text-5xl font-bold text-gray-900 mb-4">
+        <h1 class="text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
           Explore Hands-On Labs
         </h1>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
           Deepen your cloud skills with practical workshops on various AWS
           services and real-world scenarios.
         </p>
