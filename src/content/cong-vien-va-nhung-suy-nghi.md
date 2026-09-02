@@ -12,7 +12,7 @@ topics:
   - blog
 tweet:
 format: blog
-photo: https://bookingservice.com.vn/upload/images/cong-vien-gia-dinh-1(2).jpg
+photo: https://docs.nqnam.dev/blog/images/cong-vien-gia-dinh-cover.webp
 canonical_url:
 seo:
   metatitle: >
@@ -21,7 +21,7 @@ seo:
 publish: true
 ---
 
-![background](https://bookingservice.com.vn/upload/images/cong-vien-gia-dinh-1(2).jpg)
+![background](https://docs.nqnam.dev/blog/images/cong-vien-gia-dinh-cover.webp)
 
 Dạo này hay có thói quen vào [công viên Gia Định](https://vi.wikipedia.org/wiki/C%C3%B4ng_vi%C3%AAn_Gia_%C4%90%E1%BB%8Bnh) tận hưởng không khí và năng lượng trong lành từ cây xanh. Có vẻ cây xanh giúp con người ta được dễ chịu hơn, hít được nhiều oxy nên khiến mình thoải mái hơn.
 
@@ -31,7 +31,7 @@ Quang cảnh thì khá thú vị, bao bọc bên ngoài là khung cảnh xe cộ
 
 Quan sát mọi người đi ngang qua chỗ mình ngồi thì có một sự thú vị là đa số người trẻ tập thể dục đều là nam, chỉ có số ít là nữ nhưng ngược lại là số các cô trung niên lại nhiều hơn các chú. Tại sao vậy nhỉ?
 
-![mai phuong thuy chay bo](https://vnn-imgs-f.vgcloud.vn/2020/10/18/21/mai-phuong-thuy-khoe-hinh-the-chuan-khi-chay-bo-o-ho-guom-4.jpg?width=260&s=hEq5tZ8rXngKizSIDa_dNw)
+![mai phuong thuy chay bo](https://docs.nqnam.dev/blog/images/mai-phuong-thuy-khoe-hinh-the-chuan-khi-chay-bo-o-ho-guom-4.jpg)
 
 Ngồi tiếp một lúc thì mình có thấy một chú đang tập thể dục. Quan sát thêm một chút thì lại thấy quen quen, có vẻ chú là bộ đội và đang tập [4 bài thể dục của bộ đội](https://www.youtube.com/watch?v=83D0dLtsJQo), thứ mình đã quên béng từ hồi ra quân rồi. Đúng là khi có lý tưởng sống thì người ta mới có cái để duy trì và cố gắng.
 
