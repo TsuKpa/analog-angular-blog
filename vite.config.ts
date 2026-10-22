@@ -3,6 +3,7 @@
 import { defineConfig } from 'vite';
 import analog, { PrerenderContentFile } from '@analogjs/platform';
 import tailwindcss from '@tailwindcss/vite';
+import { glossaryTermExtension } from './src/markdown/glossary-term.extension';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -45,6 +46,9 @@ export default defineConfig(({ mode }) => {
       analog({
         content: {
           highlighter: 'prism',
+          markedOptions: {
+            extensions: [glossaryTermExtension],
+          },
         },
         prerender: {
           routes: async () => [
