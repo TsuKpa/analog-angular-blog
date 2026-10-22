@@ -2,7 +2,7 @@
 title: >
     AI Agent từ A đến Z phần III: Agent, chi phí và bảo mật
 description: >
-    Model không có tay chân, vậy làm sao nó sửa code, chạy test? Tool use, agent loop, MCP, skill, subagent, prompt caching giúp giảm 90% hóa đơn, và làm sao để agent không bị lừa.
+    Tool use, agent loop, MCP, skill, subagent, prompt caching giúp giảm 90% hóa đơn, bảo mật cho agent, và điểm qua các tool, repo đang hot: caveman, ponytail, Oh My Pi, MCP cho web dev, tool làm video.
 authors:
   - Nam Nguyen (TsuKpa)
 createdDate: 22 Oct, 2026
@@ -22,13 +22,13 @@ seo:
   metatitle: >
     AI Agent từ A đến Z phần III: Agent, chi phí và bảo mật
   metadescription: >
-    Model không có tay chân, vậy làm sao nó sửa code, chạy test? Tool use, agent loop, MCP, skill, subagent, prompt caching giúp giảm 90% hóa đơn, và làm sao để agent không bị lừa.
+    Tool use, agent loop, MCP, skill, subagent, prompt caching giúp giảm 90% hóa đơn, bảo mật cho agent, và điểm qua các tool, repo đang hot: caveman, ponytail, Oh My Pi, MCP cho web dev, tool làm video.
 publish: true
 ---
 
 ![background](/blog/images/ai-agent/cover-3.png)
 
-Xin chào mọi người, sau 2 phần "lý thuyết suông" ([phần I](/blog/ai-agent-a-to-z-part-1), [phần II](/blog/ai-agent-a-to-z-part-2)) thì giờ tới phần cuối và cũng là phần mình thích nhất: **agent**, kèm theo 2 chuyện ai cũng quan tâm là **tiền** và **bảo mật**.
+Xin chào mọi người, sau 2 phần "lý thuyết suông" ([phần I](/blog/ai-agent-a-to-z-part-1), [phần II](/blog/ai-agent-a-to-z-part-2)) thì giờ tới phần cuối và cũng là phần mình thích nhất: **agent**, kèm theo 2 chuyện ai cũng quan tâm là **tiền** và **bảo mật**. Cuối bài mình điểm qua thêm mấy tool, repo đang hot trên GitHub.
 
 Chatbot thì trả lời câu hỏi. Còn agent thì **tự làm nhiều bước** để hoàn thành việc: đọc file, chạy lệnh, sửa code, chạy test lại. Khác biệt nằm ở 3 thứ: **tool**, **vòng lặp**, và **phần mềm điều khiển vòng lặp** đó.
 
@@ -221,7 +221,119 @@ Cài một skill hay một MCP server cũng giống cài một package npm: bạ
 - Kiểm tra package mới mà agent đề xuất có thật không trước khi cài.
 - Hành động không đảo ngược được (deploy, xóa dữ liệu, gửi email) **luôn cần người duyệt**.
 
-## 8. Thuật ngữ trong bài
+## 8. Hệ sinh thái tool và repo đáng xem
+
+Giờ qua phần nhẹ nhàng hơn nè ^^ Số sao GitHub mình kiểm tra ngày 21–22/10/2026 và đã làm tròn. Lưu ý là sao nói lên độ phổ biến, **không nói lên chất lượng hay độ an toàn**. Mấy con số "tiết kiệm token" phần lớn do chính tác giả tự đo, trừ khi mình ghi rõ có kiểm chứng độc lập.
+
+### 8.1. Bốn cái tên hay được nhắc: sự thật và quảng cáo
+
+| Tên | ⭐ | Thật ra là gì | Kiểm chứng độc lập nói gì | Nên dùng? |
+|---|---|---|---|---|
+| **[ponytail](https://github.com/DietrichGebert/ponytail)** | 170,6k | Skill chống over-engineering: trước khi viết code, agent tự hỏi "có cần code này không, codebase đã có chưa, thư viện chuẩn có chưa" | Tác giả báo giảm ~53% lượng code, ~26% chi phí. InfoQ chỉ ra benchmark gốc dùng baseline sai, và một prompt 7 chữ ("Follow YAGNI principles...") từng thắng nó | Pilot rồi tự đo |
+| **[caveman](https://github.com/JuliusBrussee/caveman)** | 114k | Skill bắt agent trả lời cụt lủn kiểu "người tiền sử" để giảm output token. Từ v4 có thêm proxy nén log và JSON | Quảng cáo "giảm 65% token". Implicator.ai đo độc lập: output giảm 12–23%, nhưng **tổng hóa đơn chỉ giảm 1–3%** vì output là phần nhỏ. Telemetry bật mặc định | Phần nén log mới đáng giá |
+| **[Oh My Pi](https://github.com/can1357/oh-my-pi)** | 34k | Bản fork "đủ đồ chơi" của Pi (coding agent tối giản ~117k⭐). Thêm LSP, debugger, subagent chạy trên git worktree riêng | Phát hành rất đều (v18.12.6 ngày 21/10/2026). Nhiều dự án khác cũng chạy trên nền fork của Pi | Cho ai thích terminal |
+| **Jev** (TypeSafe) | — | Không phải coding tool. Là "System One model": trả về quyết định có xác suất (có/không, chọn một, chấm điểm), không sinh văn bản. Rẻ (~$0,0004/lần), nhanh (~0,4 giây) | Độ chính xác 67,8% so với 73–74% của LLM hàng đầu, theo benchmark của chính hãng. Đang có danh sách chờ | Chỉ khi phân loại số lượng lớn |
+
+Cá nhân mình thấy caveman nổi vì cái tên với cái meme dễ thương thôi, chứ về tiền bạc thì tác dụng lên hóa đơn không nhiều như quảng cáo. Như mục 6 ở trên, đòn bẩy lớn nhất vẫn là caching.
+
+### 8.2. Coding agent
+
+| Tool | ⭐ | Điểm đáng chú ý |
+|---|---|---|
+| **OpenCode** | 219,8k | Agent mã nguồn mở lớn nhất, dùng được với mọi model, không bị khóa vào một nhà cung cấp |
+| **Claude Code** | 152,7k | Chuẩn tham chiếu cho skills, hooks, plugins, MCP. Phần lớn bộ skill cộng đồng nhắm tới nó trước |
+| **Codex CLI** | ~129k | Viết bằng Rust, Apache-2.0, có plugin và hook |
+| **Pi** | ~117k | Khung agent tối giản, cố ý bỏ subagent và plan mode để bạn tự thêm bằng TypeScript |
+| **Gemini CLI** | 106,6k | Apache-2.0, từng có gói miễn phí, hợp để thử nghiệm |
+| **OpenHands** | 91,5k | Tự host, điều phối nhiều agent khác, chạy theo lịch hoặc webhook |
+| **Cline** | ~68k | Extension VS Code, có cả CLI và SDK |
+| **Aider** | 49,7k | Lâu đời, xoay quanh git. Tăng trưởng đã chững lại |
+| **Roo Code** | 24,3k | **Đã archive ngày 15/5/2026**, đừng chọn |
+
+### 8.3. Bộ skill, cấu hình và quy trình
+
+| Repo | ⭐ | Dùng để làm gì |
+|---|---|---|
+| [obra/superpowers](https://github.com/obra/superpowers) | ~301k | Quy trình brainstorm → plan → TDD → review, đóng gói thành skill |
+| [affaan-m/everything-claude-code](https://github.com/affaan-m/everything-claude-code) | ~286k | Bộ đồ nghề agent, skill, hook, memory, quét bảo mật. Dùng được cho nhiều agent |
+| [anthropics/skills](https://github.com/anthropics/skills) | ~182k | Skill mẫu chính chủ của Anthropic |
+| [github/spec-kit](https://github.com/github/spec-kit) | 141,4k | Spec-driven development: spec → plan → tasks → implement |
+| [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | 108,9k | 25 skill cho performance, bảo mật, accessibility, test. Rất hợp team web |
+| [stablyai/orca](https://github.com/stablyai/orca) | ~101k | Chạy cả đội agent song song, mỗi agent một git worktree |
+| [pbakaus/impeccable](https://github.com/pbakaus/impeccable) | 83,9k | Skill giúp UI do AI sinh ra bớt "mùi AI" |
+| [hesreallyhim/awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code) | 55,6k | Danh sách tuyển chọn lệnh, hook, workflow |
+
+Lưu ý license: oh-my-openagent (70,3k⭐) dùng license SUL-1.0, không phải chuẩn mã nguồn mở OSI, nên check trước khi dùng thương mại nha.
+
+### 8.4. MCP server cho web dev
+
+| Server | ⭐ | Giải quyết vấn đề gì |
+|---|---|---|
+| **Context7** | 63,5k | Đưa tài liệu đúng phiên bản thư viện vào prompt, giảm việc model bịa API của React, Next.js,... |
+| **Chrome DevTools MCP** | 52,9k | Agent xem console, network, performance trace, DOM của trang đang chạy |
+| **Playwright MCP** | 38k | Agent tự mở trình duyệt kiểm tra UI vừa sửa, viết test E2E |
+| **GitHub MCP** | 32,2k | Issue, PR, CI, tìm code ngay trong agent |
+| **Sentry MCP** | 837 | Kéo lỗi production vào context. Ít sao nhưng rất có ích |
+
+### 8.5. Framework, gateway và tool tiết kiệm token
+
+| Tool | ⭐ | Ghi chú |
+|---|---|---|
+| **Vercel AI SDK** | 27,4k | **Hợp nhất với team TypeScript/React**: stream UI, tool calling, đổi nhà cung cấp dễ |
+| **Mastra** | 27,1k | Framework agent TypeScript: workflow, memory, eval |
+| **LangGraph** | 43k | Dựng workflow dạng graph có trạng thái |
+| **LiteLLM** | 61,3k | Proxy chuẩn OpenAI cho hơn 100 nhà cung cấp: ngân sách, key, theo dõi chi tiêu, chuyển dự phòng |
+| **Langfuse** | 36,1k | Trace, quản lý prompt, eval. Tự host được |
+| **Promptfoo** | 24,2k | Test prompt và red-team trong CI |
+| **claude-mem** | ~102k | Trí nhớ xuyên phiên qua hook, SQLite, Chroma |
+| **RTK** | 84k | Proxy CLI bằng Rust lọc output lệnh shell trước khi đưa cho agent |
+| **Repomix** | 28,9k | Gói cả repo thành một file cho AI đọc, chế độ `--compress` báo giảm ~70% token |
+| **ccusage** | 19,1k | Báo cáo token và chi phí từ log trên máy. Chạy `npx ccusage@latest` là có liền |
+
+Thứ tự đòn bẩy tiết kiệm theo Implicator.ai: prompt caching → kỷ luật với output của tool → nén file memory → trả lời ngắn gọn. Nghĩa là RTK, Repomix có tác dụng lên hóa đơn nhiều hơn caveman.
+
+## 9. Bonus: tool làm video tutorial, TikTok, hoạt hình
+
+Cái này team mình có hỏi nên mình tìm luôn, toàn hàng mã nguồn mở nhiều sao ^^
+
+### 9.1. Edit video tutorial
+
+| Repo | ⭐ | License | Làm gì |
+|---|---|---|---|
+| [browser-use/video-use](https://github.com/browser-use/video-use) | 29,4k | MIT | Edit video bằng Claude Code: cắt "ờ, à" và khoảng lặng, chỉnh màu, burn phụ đề, chèn animation. Tự đánh giá và render lại tối đa 3 lần |
+| [WyattBlue/auto-editor](https://github.com/WyattBlue/auto-editor) | 5,5k | Unlicense | CLI tự cắt khoảng lặng, xuất timeline sang Premiere, DaVinci Resolve, Final Cut, Kdenlive, Shotcut |
+| [m-bain/whisperX](https://github.com/m-bain/whisperX) | 23,9k | BSD-2 | Giọng nói thành chữ, có mốc thời gian từng từ. Nền tảng để làm phụ đề |
+
+### 9.2. Tự động làm video ngắn TikTok, Reels, Shorts
+
+| Repo | ⭐ | License | Làm gì |
+|---|---|---|---|
+| [harry0703/MoneyPrinterTurbo](https://github.com/harry0703/MoneyPrinterTurbo) | 133,8k | MIT | Nhập chủ đề: tự viết kịch bản, lấy stock footage, đọc giọng (Edge TTS miễn phí), phụ đề, nhạc nền. Xuất 9:16 |
+| [calesthio/OpenMontage](https://github.com/calesthio/OpenMontage) | 70,5k | **AGPL-3.0** | Biến coding agent thành studio với ~11 pipeline, có cổng người duyệt và trần chi tiêu |
+| [ATH-MaaS/Pixelle-Video](https://github.com/ATH-MaaS/Pixelle-Video) | 29,3k | Apache-2.0 | Như trên nhưng hình và clip do AI sinh |
+| [linyqh/NarratoAI](https://github.com/linyqh/NarratoAI) | 11,1k | MIT | Video bình luận phim: viết lời bình, cắt ghép, lồng tiếng, xuất draft CapCut |
+
+### 9.3. Motion graphics bằng code
+
+| Repo | ⭐ | License | Làm gì |
+|---|---|---|---|
+| [heygen-com/hyperframes](https://github.com/heygen-com/hyperframes) | 69,3k | Apache-2.0 | Viết HTML, CSS, GSAP rồi render ra MP4. **Hợp nhất với dân web** như tụi mình |
+| [remotion-dev/remotion](https://github.com/remotion-dev/remotion) | 65,9k | License riêng | Làm video bằng React. Miễn phí cho cá nhân và công ty tối đa 3 nhân viên, lớn hơn phải mua license |
+| [motion-canvas/motion-canvas](https://github.com/motion-canvas/motion-canvas) | 19k | MIT | Lập trình animation bằng TypeScript |
+
+### 9.4. Hoạt hình và model sinh video chạy trên máy
+
+| Repo / model | ⭐ | License | Làm gì |
+|---|---|---|---|
+| [ManimCommunity/manim](https://github.com/ManimCommunity/manim) | 40,2k | MIT | Video giải thích kiểu 3Blue1Brown (bản gốc 3b1b/manim 93,9k⭐) |
+| [HBAI-Ltd/Toonflow-app](https://github.com/HBAI-Ltd/Toonflow-app) | 18,5k | MIT | Phim ngắn, truyện tranh động bằng AI: kịch bản → nhân vật → storyboard → từng cảnh |
+| [KwaiVGI/LivePortrait](https://github.com/KwaiVGI/LivePortrait) | 19,3k | Chưa xác minh | Làm ảnh chân dung "sống dậy" |
+| [comfyanonymous/ComfyUI](https://github.com/comfyanonymous/ComfyUI) | 141,7k | GPL-3.0 | Giao diện kéo thả node để chạy model sinh ảnh, video |
+| [Wan-Video/Wan2.2](https://github.com/Wan-Video/Wan2.2) | 18k | Apache-2.0 | Sinh video từ chữ hoặc ảnh, bản nén chạy với GPU ~8 GB |
+
+> **Trước khi dùng trong công ty**: check license kỹ (AGPL buộc công bố mã nguồn nếu nhúng vào SaaS, Remotion cần mua license nếu công ty trên 3 người). Giọng nói và khuôn mặt chỉ dùng khi chính chủ đồng ý. Mấy nền tảng như TikTok cũng yêu cầu gắn nhãn nội dung do AI tạo.
+
+## 10. Thuật ngữ trong bài
 
 **Agent:**
 
@@ -267,13 +379,26 @@ Cài một skill hay một MCP server cũng giống cài một package npm: bạ
 - **Sandbox**: môi trường cách ly để agent chạy lệnh. *Ví dụ: phòng thí nghiệm kín.*
 - **Slopsquatting**: AI bịa tên package, kẻ xấu đăng ký đúng tên đó để cài mã độc. *Ví dụ: ai đó mở cửa hàng đúng cái tên mà bản đồ ghi sai.*
 
-## 9. Tổng kết
+**Tool và video:**
+
+- **LLM Gateway**: cổng trung tâm giữa app và các nhà cung cấp AI, lo ngân sách, thử lại, dự phòng, ghi log. *Ví dụ: trạm thu phí kiêm điều phối giao thông.*
+- **Git worktree**: nhiều thư mục làm việc từ cùng một repo, mỗi agent một bản nên không ghi đè lên nhau. *Ví dụ: mỗi thợ một bàn riêng thay vì chen nhau một bàn.*
+- **Spec-driven development**: viết spec → plan → tasks rồi mới cho agent code. *Ví dụ: có bản vẽ rồi mới xây nhà.*
+- **Text-to-video / Image-to-video**: sinh video từ mô tả bằng chữ hoặc từ một ảnh tĩnh. *Ví dụ: "con mèo đội mũ phi hành gia đi trên mặt trăng" thành clip 5 giây.*
+- **Diffusion model**: model tạo ảnh, video bằng cách khử dần "nhiễu" thành hình rõ. *Ví dụ: tấm ảnh polaroid hiện hình dần.*
+- **TTS / Voice clone**: đọc chữ thành giọng nói, hoặc bắt chước giọng một người cụ thể (chỉ dùng khi chính chủ đồng ý). *Ví dụ: lồng tiếng tự động cho video tutorial.*
+- **EDL (Edit Decision List)**: danh sách điểm cắt, giữ đoạn nào, bỏ đoạn nào. *Ví dụ: kịch bản dựng phim dạng bảng.*
+- **B-roll**: cảnh phụ chèn vào để minh họa lời nói. *Ví dụ: nói về "server" thì chèn cảnh phòng máy chủ.*
+- **GGUF**: định dạng model đã nén để chạy trên máy yếu hơn. *Ví dụ: bản "lite" của một ứng dụng.*
+
+## 11. Tổng kết
 
 - Model không tự chạy gì cả, nó chỉ viết "phiếu yêu cầu", **harness** mới là người làm và giữ quyền.
 - Một câu hỏi có thể thành nhiều lượt gọi model, mỗi lượt gửi lại cả context.
 - MCP là chuẩn cắm tool, nhưng mỗi tool đều chiếm chỗ trong context.
 - Prompt caching có thể giảm khoảng 90% hóa đơn nếu xếp prompt đúng: **thứ ít đổi trước, thứ hay đổi sau**.
 - Lớp bảo vệ quan trọng nhất là **quyền và sandbox do mình cấu hình**, đừng để một agent giữ đủ "lethal trifecta".
+- Tool nhiều sao chưa chắc đã tốt, số liệu quảng cáo nên tự đo lại trên repo của mình.
 
 Vậy là xong series 3 phần rồi, cảm ơn mọi người đã đọc tới đây nha <3
 
@@ -289,4 +414,4 @@ ________________
 - [Phần II: Bên trong model và cách model được dạy](/blog/ai-agent-a-to-z-part-2)
 - **Phần III: Agent, chi phí và bảo mật** (bài này)
 
-**Nguồn tham khảo:** [Tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview), [Tool search](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool), [Agent Skills](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview), [MCP specification](https://modelcontextprotocol.io/specification/latest), [Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents), [Claude Code costs](https://code.claude.com/docs/en/costs), [Anthropic pricing](https://platform.claude.com/docs/en/about-claude/pricing), [Anthropic prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching), [OpenAI prompt caching](https://developers.openai.com/api/docs/guides/prompt-caching), [Gemini caching](https://ai.google.dev/gemini-api/docs/caching), [Graph Engineering Explained](https://aishwaryasrinivasan.substack.com/p/graph-engineering-explained), [Constitutional Classifiers](https://www.anthropic.com/news/constitutional-classifiers), [Simon Willison: lethal trifecta](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/), [OpenClaw trên Wikipedia](https://en.wikipedia.org/wiki/OpenClaw), [Giá thuê H100](https://intuitionlabs.ai/articles/h100-rental-prices-cloud-comparison).
+**Nguồn tham khảo:** [Tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview), [Tool search](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool), [Agent Skills](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview), [MCP specification](https://modelcontextprotocol.io/specification/latest), [Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents), [Claude Code costs](https://code.claude.com/docs/en/costs), [Anthropic pricing](https://platform.claude.com/docs/en/about-claude/pricing), [Anthropic prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching), [OpenAI prompt caching](https://developers.openai.com/api/docs/guides/prompt-caching), [Gemini caching](https://ai.google.dev/gemini-api/docs/caching), [Graph Engineering Explained](https://aishwaryasrinivasan.substack.com/p/graph-engineering-explained), [Constitutional Classifiers](https://www.anthropic.com/news/constitutional-classifiers), [Simon Willison: lethal trifecta](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/), [OpenClaw trên Wikipedia](https://en.wikipedia.org/wiki/OpenClaw), [Giá thuê H100](https://intuitionlabs.ai/articles/h100-rental-prices-cloud-comparison), [InfoQ về ponytail](https://infoq.com/news/2026/08/ponytail-agent-skill-benchmark), [Implicator.ai về caveman](https://www.implicator.ai/caveman-claude-code-skill-cuts-output-20-your-bill-barely-notices-2/), [DataCamp về Jev](https://www.datacamp.com/blog/system-one-models-jev), [findarepo: AI video repos](https://findarepo.com/categories/ai-video/), [Remotion license](https://github.com/remotion-dev/remotion/blob/main/LICENSE.md).

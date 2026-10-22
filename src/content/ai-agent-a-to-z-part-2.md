@@ -102,7 +102,7 @@ Nhiều model lớn, nhất là model mã nguồn mở, được chia thành nhi
 
 Vì model chỉ đoán token "hợp lý nhất", nó có thể tự tin viết ra thứ **không tồn tại**: một hàm `array.sortBy()` trong JavaScript thuần, một option config chưa từng có, một package npm bịa tên,... Model không "biết" là mình sai đâu.
 
-Cách phòng là **cho nó kiểm chứng**: chạy code, chạy test, tra tài liệu đúng phiên bản của thư viện đang dùng.
+Cách phòng là **cho nó kiểm chứng**: chạy code, chạy test, tra tài liệu đúng phiên bản của thư viện đang dùng (ví dụ MCP Context7 mình giới thiệu ở [phần III](/blog/ai-agent-a-to-z-part-3)).
 
 ## 2. Model được dạy như thế nào
 
