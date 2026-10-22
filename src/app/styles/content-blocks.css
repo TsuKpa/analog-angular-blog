@@ -1,0 +1,359 @@
+/* Reusable content blocks for blog posts (raw HTML inside markdown).
+   Everything is scoped under `.blog-content` (wrapper in [slug].page.ts).
+   Dark mode: `.dark` on <html>. See docs/content-components.md.
+
+   Specificity note: index.page.scss compiles to `[_nghost-x] .analog-markdown li`
+   (0,2,1) etc. Rules below that must beat it use a doubled class or an extra
+   element selector so they reach (0,3,x) / (0,2,2) regardless of source order. */
+
+.blog-content {
+  /* Blog palette only: Tailwind grays + blue (#2563eb, hover #1d4ed8; dark #70b8f7 / #9ecbfa). */
+  --cb-ink: #111827;
+  --cb-text: #374151;
+  --cb-muted: #6b7280;
+  --cb-surface: #ffffff;
+  --cb-surface-2: #f9fafb;
+  --cb-rule: #e5e7eb;
+  --cb-accent: #2563eb;
+  --cb-info-bg: #f3f4f6;
+  --cb-info-rule: #3b82f6;
+  --cb-warn: #1d4ed8;
+  --cb-warn-bg: #dbeafe;
+  --cb-warn-rule: #1d4ed8;
+  --cb-tip: #2563eb;
+  --cb-tip-bg: #f3f4f6;
+  --cb-tip-rule: #3b82f6;
+  --cb-analogy: #b45309;
+  --cb-ok: #15803d;
+  --cb-bad: #b91c1c;
+  --cb-t1: #dbeafe;
+  --cb-t2: #e5e7eb;
+  --cb-t3: #eff6ff;
+  --cb-t4: #f3f4f6;
+  --cb-t5: #bfdbfe;
+  --cb-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.dark .blog-content {
+  --cb-ink: #f3f4f6;
+  --cb-text: #d1d5db;
+  --cb-muted: #9ca3af;
+  --cb-surface: #111827;
+  --cb-surface-2: #1f2937;
+  --cb-rule: #374151;
+  --cb-accent: #70b8f7;
+  --cb-info-bg: #1f2937;
+  --cb-info-rule: #70b8f7;
+  --cb-warn: #9ecbfa;
+  --cb-warn-bg: #1e3a5f;
+  --cb-warn-rule: #9ecbfa;
+  --cb-tip: #70b8f7;
+  --cb-tip-bg: #1f2937;
+  --cb-tip-rule: #70b8f7;
+  --cb-analogy: #fbbf24;
+  --cb-ok: #4ade80;
+  --cb-bad: #f87171;
+  --cb-t1: #1e3a5f;
+  --cb-t2: #374151;
+  --cb-t3: #172554;
+  --cb-t4: #1f2937;
+  --cb-t5: #1e40af;
+}
+
+/* ───────── callout ───────── */
+.blog-content .callout {
+  /* same look as the blog's blockquote: gray panel, blue left border */
+  background: var(--cb-info-bg);
+  border-left: 4px solid var(--cb-info-rule);
+  border-radius: 0.25rem;
+  padding: 0.875rem 1.125rem;
+  margin: 1.5rem 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  --cb-label: var(--cb-accent);
+}
+
+.blog-content .callout--warn {
+  border-left-color: var(--cb-warn-rule);
+  --cb-label: var(--cb-warn);
+}
+
+.blog-content .callout--tip {
+  border-left-color: var(--cb-tip-rule);
+  --cb-label: var(--cb-tip);
+}
+
+.blog-content .callout .callout-title {
+  display: block;
+  margin: 0 0 0.25rem;
+  font-family: inherit;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cb-label, var(--cb-accent));
+}
+
+/* beat `.analog-markdown p` (margin 1em, justify) */
+.blog-content .callout.callout p {
+  margin-block: 0.5rem;
+  text-align: left;
+}
+.blog-content .callout.callout > :first-child { margin-top: 0; }
+.blog-content .callout.callout > :last-child { margin-bottom: 0; }
+
+/* ───────── analogy ───────── */
+.blog-content .analogy {
+  border-left: 3px solid var(--cb-analogy);
+  padding: 0.125rem 0 0.125rem 1rem;
+  margin: 1.5rem 0;
+  color: var(--cb-text);
+}
+
+.blog-content .analogy::before {
+  content: attr(data-label);
+  display: block;
+  font-family: inherit;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cb-analogy);
+}
+
+/* no data-label → default label (attr() fallback is not widely supported) */
+.blog-content .analogy:not([data-label])::before {
+  content: 'Ví von';
+}
+
+.blog-content .analogy.analogy p {
+  margin-block: 0.4rem;
+  text-align: left;
+}
+
+/* ───────── tl;dr numbered cards ───────── */
+.blog-content ol.tldr {
+  list-style: none;
+  counter-reset: tldr;
+  display: grid;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+  padding: 0;
+}
+
+.blog-content ol.tldr > li {
+  list-style: none;
+  counter-increment: tldr;
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0.875rem 1rem;
+  background: var(--cb-surface);
+  border: 1px solid var(--cb-rule);
+  border-radius: 0.5rem;
+}
+
+.blog-content ol.tldr > li::before {
+  content: counter(tldr);
+  font-family: inherit;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--cb-accent);
+}
+
+.blog-content ol.tldr.tldr > li p {
+  margin: 0;
+  text-align: left;
+}
+
+/* ───────── cards ───────── */
+.blog-content .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.blog-content .card {
+  background: var(--cb-surface);
+  border: 1px solid var(--cb-rule);
+  border-radius: 0.5rem;
+  padding: 0.875rem 1rem;
+  min-width: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.blog-content .card .card-kicker {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-family: inherit;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cb-muted);
+}
+
+.blog-content .card.card h3,
+.blog-content .card.card h4 {
+  margin: 0 0 0.25rem;
+  font-size: 1.05rem;
+  color: var(--cb-ink);
+  border: 0;
+  padding: 0;
+}
+
+.blog-content .card.card p {
+  margin-block: 0.4rem 0;
+  font-size: 0.95rem;
+  text-align: left;
+}
+
+/* ───────── pill / tier ───────── */
+.blog-content .pill,
+.blog-content .tier {
+  display: inline-block;
+  padding: 0.0625rem 0.5rem;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 0.7rem;
+  line-height: 1.5;
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+
+.blog-content .pill {
+  color: var(--cb-accent);
+  border: 1px solid currentColor;
+}
+.blog-content .pill--ok { color: var(--cb-ok); }
+.blog-content .pill--warn { color: var(--cb-warn); }
+.blog-content .pill--bad { color: var(--cb-bad); }
+
+.blog-content .tier {
+  color: var(--cb-muted);
+  background: var(--cb-surface-2);
+  border: 1px solid var(--cb-rule);
+}
+
+/* ───────── token chips: <span class="chip"><b>text</b><i>id</i></span> ───────── */
+.blog-content .chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.25rem 0.1875rem;
+  margin: 1.25rem 0;
+}
+
+.blog-content .chip {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.125rem;
+}
+
+.blog-content .chip b {
+  font-family: var(--cb-mono);
+  font-size: 0.95rem;
+  font-weight: 500;
+  white-space: pre;
+  padding: 0.1875rem 0.3125rem;
+  border-radius: 0.25rem;
+  color: var(--cb-ink);
+}
+
+.blog-content .chip i {
+  font-family: var(--cb-mono);
+  font-style: normal;
+  font-size: 0.62rem;
+  color: var(--cb-muted);
+}
+
+.blog-content .chip:nth-child(5n + 1) b { background: var(--cb-t1); }
+.blog-content .chip:nth-child(5n + 2) b { background: var(--cb-t2); }
+.blog-content .chip:nth-child(5n + 3) b { background: var(--cb-t3); }
+.blog-content .chip:nth-child(5n + 4) b { background: var(--cb-t4); }
+.blog-content .chip:nth-child(5n + 5) b { background: var(--cb-t5); }
+
+/* ───────── figure + inline SVG diagram ───────── */
+.blog-content figure {
+  margin: 1.75rem 0;
+}
+
+.blog-content figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--cb-muted);
+  text-align: center;
+}
+
+.blog-content .figure-diagram {
+  background: var(--cb-surface);
+  border: 1px solid var(--cb-rule);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.blog-content .figure-diagram svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--cb-ink);
+}
+
+/* force horizontal scroll on narrow screens for dense diagrams */
+.blog-content .figure-diagram--wide svg { min-width: 760px; }
+.blog-content .figure-diagram--mid svg { min-width: 560px; }
+
+.blog-content svg .bx { fill: var(--cb-surface); stroke: var(--cb-rule); stroke-width: 1.5; }
+.blog-content svg .bx-a { fill: var(--cb-info-bg); stroke: var(--cb-accent); stroke-width: 1.5; }
+.blog-content svg .bx-m { fill: var(--cb-warn-bg); stroke: var(--cb-warn); stroke-width: 1.5; }
+.blog-content svg .bx-p { fill: var(--cb-surface-2); stroke: var(--cb-rule); stroke-width: 1.5; }
+
+.blog-content svg text { fill: var(--cb-ink); font-size: 12px; }
+.blog-content svg text.t { font-weight: 700; font-size: 13px; }
+.blog-content svg text.s { fill: var(--cb-muted); font-size: 11px; }
+.blog-content svg text.m { font-family: var(--cb-mono); font-size: 10.5px; fill: var(--cb-muted); }
+.blog-content svg text.acc { fill: var(--cb-accent); font-weight: 600; }
+.blog-content svg text.amb { fill: var(--cb-warn); font-weight: 600; }
+
+.blog-content svg .ln { stroke: var(--cb-muted); stroke-width: 1.5; fill: none; }
+.blog-content svg .ln-a { stroke: var(--cb-accent); stroke-width: 1.8; fill: none; }
+.blog-content svg .ln-m { stroke: var(--cb-warn); stroke-width: 1.8; fill: none; }
+.blog-content svg .dash { stroke-dasharray: 5 4; }
+.blog-content svg .fill-muted { fill: var(--cb-muted); }
+.blog-content svg .fill-acc { fill: var(--cb-accent); }
+.blog-content svg .fill-amb { fill: var(--cb-warn); }
+
+/* ───────── wide table wrapper ───────── */
+.blog-content .table-wrap {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border: 1px solid var(--cb-rule);
+  border-radius: 0.5rem;
+  background: var(--cb-surface);
+  -webkit-overflow-scrolling: touch;
+}
+
+/* existing table styles add margin/shadow/radius; neutralise inside the wrapper */
+.blog-content .table-wrap.table-wrap table {
+  margin: 0;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+/* ───────── compact table ───────── */
+/* Wrap a markdown table in <div class="table-sm"> (blank lines inside) for dense tables. */
+.blog-content .table-sm.table-sm table {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+.blog-content .table-sm.table-sm th,
+.blog-content .table-sm.table-sm td {
+  padding: 0.5rem 0.625rem;
+  font-size: 0.8125rem;
+}

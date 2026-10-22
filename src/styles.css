@@ -12,6 +12,8 @@
 /* check node_modules/prismjs/themes/ for the available themes */
 @import "prismjs/themes/prism-tomorrow.min.css";
 @import 'tailwindcss';
+@import './app/styles/glossary.css';
+@import './app/styles/content-blocks.css';
 
 /* Class-based dark mode: `dark:` utilities activate when <html> has .dark
    (toggled by ThemeService / the pull-cord), instead of prefers-color-scheme. */

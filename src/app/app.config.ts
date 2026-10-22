@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideFileRouter, requestContextInterceptor } from '@analogjs/router';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import routes from './routes';
 import { provideContent, withMarkdownRenderer } from '@analogjs/content';
 import { withPrismHighlighter } from '@analogjs/content/prism-highlighter';
@@ -19,7 +19,10 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideFileRouter(),
+    // Scroll to top on navigation (e.g. series links inside a post); restore position on back/forward.
+    provideFileRouter(
+      withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })
+    ),
     provideRouter(routes),
     provideHttpClient(
       withFetch(),

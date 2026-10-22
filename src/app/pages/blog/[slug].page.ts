@@ -27,6 +27,8 @@ import { ImageClickEvent } from '../../directives/clickable-image.directive';
 import { MarkdownImageDirective } from '../../directives/markdown-image.directive';
 import { getCdnImageUrl } from '../../utils/cdn-helper';
 import { TableOfContentsComponent } from '../../components/table-of-contents/table-of-contents.component';
+import { GlossaryTooltipDirective } from '../../directives/glossary-tooltip.directive';
+import { MarkdownWidgetsDirective } from '../../directives/markdown-widgets.directive';
 
 @Component({
   selector: 'app-blog-post',
@@ -39,6 +41,8 @@ import { TableOfContentsComponent } from '../../components/table-of-contents/tab
     ImageModalComponent,
     MarkdownImageDirective,
     TableOfContentsComponent,
+    GlossaryTooltipDirective,
+    MarkdownWidgetsDirective,
   ],
   template: `
     <!-- Loading State with Skeleton -->
@@ -112,7 +116,7 @@ import { TableOfContentsComponent } from '../../components/table-of-contents/tab
             <!-- Table of Contents -->
             <app-table-of-contents [content]="post.content"></app-table-of-contents>
 
-            <div class="blog-content" appMarkdownImage>
+            <div class="blog-content" appMarkdownImage appGlossaryTooltip appMarkdownWidgets>
               <analog-markdown [content]="post.content" />
             </div>
             <div [appUtterances]="isProd"></div>
