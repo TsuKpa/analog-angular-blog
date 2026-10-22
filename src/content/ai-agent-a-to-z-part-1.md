@@ -32,7 +32,7 @@ Xin chào mọi người, như mình có kể trong [bài tổng kết 2025](/bl
 
 Nên mình quyết định ngồi research lại từ A tới Z cách mà mấy con AI agent (Claude, ChatGPT, Gemini,...) hoạt động, để chia sẻ với team và với mọi người. Series này viết cho bạn nào từ junior trở lên đều đọc được, **không cần biết gì về machine learning** hết nha.
 
-Series sẽ gồm 6 phần, phần đầu tiên này mình sẽ đi qua **hành trình của một request**: từ lúc bạn nhấn Enter cho tới khi chữ cuối cùng hiện ra trên màn hình.
+Series sẽ gồm 3 phần, phần đầu tiên này mình sẽ đi qua **hành trình của một request**: từ lúc bạn nhấn Enter cho tới khi chữ cuối cùng hiện ra trên màn hình.
 
 > Lưu ý: số liệu (giá, tên model, số sao GitHub,...) trong series mình kiểm tra vào ngày 22/10/2026, mấy cái này thay đổi nhanh lắm nên mọi người check lại trước khi dùng nhé.
 
@@ -113,7 +113,7 @@ Ví von cho dễ hiểu: giống như gọi tổng đài mà lần nào cũng g�
 
 ### 3.2. Trạm 3–4: API và tokenizer
 
-API kiểm tra key, **rate limit**, và xem phần đầu prompt đã có trong cache chưa (phần IV mình nói kỹ). Sau đó server "ép phẳng" gói JSON thành một chuỗi duy nhất bằng **chat template**: các vai system, user, assistant, tool được đánh dấu bằng những token đặc biệt. Chuỗi này đi qua **tokenizer** để thành dãy số.
+API kiểm tra key, **rate limit**, và xem phần đầu prompt đã có trong cache chưa (phần III mình nói kỹ). Sau đó server "ép phẳng" gói JSON thành một chuỗi duy nhất bằng **chat template**: các vai system, user, assistant, tool được đánh dấu bằng những token đặc biệt. Chuỗi này đi qua **tokenizer** để thành dãy số.
 
 ```
 <|system|>Bạn là trợ lý code cho dự án Next.js...<|tools|>[read_file: Đọc nội dung 1 file...]
@@ -159,8 +159,6 @@ Cách cắt ở hình trên chỉ để minh họa thôi, mỗi model có tokeni
 
 Ảnh đi qua một **vision encoder**: ảnh bị cắt thành các ô vuông nhỏ (patch), mỗi ô được chuyển thành một vector giống như token chữ. Với Claude thì **mỗi ô 28×28 pixel là 1 token**. Ảnh lớn quá sẽ bị thu nhỏ trước.
 
-![Máy tính token cho ảnh](/blog/images/ai-agent/image-tokens.png)
-
 Công thức: `token = ⌈rộng/28⌉ × ⌈cao/28⌉` (sau khi thu nhỏ cho vừa giới hạn). Một vài ví dụ:
 
 | Ảnh | Chế độ | Token |
@@ -188,7 +186,7 @@ Với Gemini, âm thanh tốn khoảng **32 token mỗi giây** (1.920 token m�
 
 ### 4.5. Video
 
-Video được xử lý như một chuỗi khung hình (ảnh), cộng thêm âm thanh nếu model hỗ trợ. Gemini nhận video trực tiếp luôn. Video thì tốn token kinh khủng, nên mấy tool thông minh không đưa nguyên video cho model. Ví dụ repo `video-use` (phần V) chỉ đưa transcript có mốc thời gian, và chỉ trích vài khung hình ở chỗ cần quyết định.
+Video được xử lý như một chuỗi khung hình (ảnh), cộng thêm âm thanh nếu model hỗ trợ. Gemini nhận video trực tiếp luôn. Video thì tốn token kinh khủng, nên cách làm khôn ngoan là không đưa nguyên video cho model, mà chỉ đưa transcript có mốc thời gian, cộng vài khung hình ở chỗ cần quyết định.
 
 ### 4.6. Native multimodal và kiểu "ghép nối"
 
@@ -197,7 +195,29 @@ Video được xử lý như một chuỗi khung hình (ảnh), cộng thêm âm
 
 Các hãng ít khi công bố chi tiết kiến trúc, nên mấy câu kiểu "natively multimodal" là lời của chính nhà cung cấp nha mọi người.
 
-## 5. Tổng kết
+## 5. Thuật ngữ trong bài
+
+Mấy thuật ngữ xuất hiện trong bài, giải thích bằng lời thường kèm ví dụ cho dễ nhớ:
+
+- **LLM (Large Language Model)**: chương trình đã đọc lượng chữ khổng lồ nên rất giỏi đoán chữ tiếp theo. Claude, GPT, Gemini đều là LLM. *Ví dụ: autocomplete trên bàn phím điện thoại, nhưng đã đọc cả thư viện.*
+- **Model / Weights (trọng số)**: "bộ não" của AI, thực chất là một file chứa hàng tỷ con số. *Ví dụ: như file .exe, không đọc hiểu được, chỉ chạy được.*
+- **Parameter (tham số)**: từng con số trong bộ não đó. "70B" là 70 tỷ tham số. *Ví dụ: như số nơ-ron, nhiều hơn thường khôn hơn nhưng nặng và tốn hơn.*
+- **Token**: đơn vị chữ mà AI đọc và tính tiền, thường là một mảnh của từ. *Ví dụ: "unbelievable" → "un" + "believ" + "able" = 3 token.*
+- **Tokenizer**: bộ "cắt chữ" thành token và đổi mỗi token thành một con số ID. *Ví dụ: như máy cắt bánh mì, mỗi tiệm cắt lát dày mỏng khác nhau.*
+- **BPE (Byte-Pair Encoding)**: cách cắt chữ phổ biến, ghép dần các cặp ký tự hay đi cùng nhau thành một mảnh. *Ví dụ: như tốc ký, cụm hay gặp như "ing", "tion" được viết bằng một ký hiệu.*
+- **Context window**: lượng token tối đa model nhìn thấy trong một lần gọi, tính cả câu hỏi lẫn câu trả lời. *Ví dụ: mặt bàn làm việc chỉ để được chừng ấy giấy.*
+- **Prompt / System prompt**: prompt là lời bạn gửi, system prompt là "nội quy" do app đặt sẵn. *Ví dụ: system prompt là bản mô tả công việc, prompt là yêu cầu hằng ngày.*
+- **Inference**: lúc model chạy để trả lời. *Ví dụ: training là đi học, inference là đi làm.*
+- **Stateless (không trạng thái)**: model không nhớ gì giữa các lần gọi. *Ví dụ: gọi tổng đài, lần nào cũng gặp nhân viên mới, phải kể lại từ đầu.*
+- **Harness**: phần mềm bọc quanh model, lo system prompt, lịch sử, chạy tool, xin quyền. *Ví dụ: model là động cơ, harness là cả chiếc xe.*
+- **Rate limit**: giới hạn số request hoặc token trong một khoảng thời gian. *Ví dụ: đèn giao thông ở cửa API.*
+- **Streaming (SSE)**: gửi câu trả lời về từng mảnh thay vì đợi xong hết. *Ví dụ: xem video online vừa tải vừa xem.*
+- **Multimodal**: model nhận nhiều loại input như chữ, ảnh, âm thanh, video. *Ví dụ: người vừa đọc, vừa nhìn, vừa nghe được.*
+- **Vision encoder / Patch**: ảnh được cắt thành ô vuông nhỏ (Claude dùng ô 28×28 px), mỗi ô thành một token. *Ví dụ: tranh ghép puzzle.*
+- **OCR**: công cụ đọc chữ trong ảnh. *Ví dụ: chụp hóa đơn rồi copy được chữ trong đó.*
+- **STT / TTS / Speech-to-speech**: giọng nói thành chữ, chữ thành giọng nói, hoặc model nghe và nói trực tiếp. *Ví dụ: nói qua phiên dịch viên so với nói chuyện trực tiếp.*
+
+## 6. Tổng kết
 
 Tóm lại thì: bạn gõ một câu → harness gói thêm cả đống thứ (system prompt, tool, lịch sử) → tất cả biến thành token → model đoán từng token một → stream về màn hình. Và vì model không có trí nhớ, nên **mỗi lượt là gửi lại tất cả**.
 
@@ -209,9 +229,6 @@ ________________
 
 - **Phần I: Hành trình của một request** (bài này)
 - [Phần II: Bên trong model và cách model được dạy](/blog/ai-agent-a-to-z-part-2)
-- [Phần III: Từ chatbot thành agent](/blog/ai-agent-a-to-z-part-3)
-- [Phần IV: Chi phí, caching và chuyện tự host](/blog/ai-agent-a-to-z-part-4)
-- [Phần V: Bảo mật và hệ sinh thái tool](/blog/ai-agent-a-to-z-part-5)
-- [Phần VI: Áp dụng cho team và từ điển thuật ngữ](/blog/ai-agent-a-to-z-part-6)
+- [Phần III: Agent, chi phí và bảo mật](/blog/ai-agent-a-to-z-part-3)
 
 **Nguồn tham khảo:** [Anthropic Vision](https://platform.claude.com/docs/en/build-with-claude/vision), [PDF support](https://platform.claude.com/docs/en/build-with-claude/pdf-support), [Streaming](https://platform.claude.com/docs/en/build-with-claude/streaming), [Anthropic pricing](https://platform.claude.com/docs/en/about-claude/pricing), [OpenAI pricing](https://developers.openai.com/api/docs/pricing), [Gemini pricing](https://ai.google.dev/gemini-api/docs/pricing), [Gemini audio](https://ai.google.dev/gemini-api/docs/audio), [OpenAI Realtime](https://developers.openai.com/api/docs/guides/realtime), [BPE paper](https://arxiv.org/abs/1508.07909), [ViT paper](https://arxiv.org/abs/2010.11929).

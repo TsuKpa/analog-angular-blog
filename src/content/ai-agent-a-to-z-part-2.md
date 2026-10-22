@@ -82,7 +82,7 @@ Mỗi token đã xử lý để lại "ghi chú" (key, value) để các token s
 
 > Ví von: prefill như đọc đề thi, lướt nhanh cả tờ. Decode như viết bài, từng chữ một. KV cache là ghi chú bên lề, nên viết tới câu thứ 10 không phải đọc lại đề từ đầu.
 
-Và đây là chỗ hay nè: **prompt caching** (phần IV) thực chất là nhà cung cấp lưu lại KV cache của phần đầu prompt giữa các request. Lần sau gửi đúng phần đầu đó, họ bỏ qua được bước prefill cho phần ấy, nên vừa rẻ hơn vừa nhanh hơn.
+Và đây là chỗ hay nè: **prompt caching** (phần III) thực chất là nhà cung cấp lưu lại KV cache của phần đầu prompt giữa các request. Lần sau gửi đúng phần đầu đó, họ bỏ qua được bước prefill cho phần ấy, nên vừa rẻ hơn vừa nhanh hơn.
 
 ### 1.5. Context window và "context rot"
 
@@ -102,7 +102,7 @@ Nhiều model lớn, nhất là model mã nguồn mở, được chia thành nhi
 
 Vì model chỉ đoán token "hợp lý nhất", nó có thể tự tin viết ra thứ **không tồn tại**: một hàm `array.sortBy()` trong JavaScript thuần, một option config chưa từng có, một package npm bịa tên,... Model không "biết" là mình sai đâu.
 
-Cách phòng là **cho nó kiểm chứng**: chạy code, chạy test, tra tài liệu đúng phiên bản (ví dụ MCP Context7 mình giới thiệu ở phần V).
+Cách phòng là **cho nó kiểm chứng**: chạy code, chạy test, tra tài liệu đúng phiên bản của thư viện đang dùng.
 
 ## 2. Model được dạy như thế nào
 
@@ -146,7 +146,33 @@ Reasoning model "nghĩ" trước khi trả lời: nó sinh ra một đoạn suy 
 
 > Sửa một lỗi typo thì không cần triệu tập cả phòng họp. Để effort max cho việc đơn giản là đang trả tiền cho rất nhiều giấy nháp không cần thiết đó mọi người.
 
-## 4. Tổng kết
+## 4. Thuật ngữ trong bài
+
+- **Embedding**: biến mỗi token thành một tọa độ trên "bản đồ ý nghĩa". *Ví dụ: "vua" gần "hoàng hậu", xa "bàn phím".*
+- **Transformer**: kiến trúc nền của hầu hết LLM hiện nay. *Ví dụ: như "kiến trúc MVC" của thế giới AI.*
+- **Attention**: cơ chế cho mỗi chữ "nhìn lại" các chữ khác để hiểu ngữ cảnh. *Ví dụ: trong "Con mèo đuổi con chuột vì nó đói", attention giúp hiểu "nó" là con mèo.*
+- **Next-token prediction**: việc duy nhất model làm, đoán token tiếp theo rồi lặp lại. *Ví dụ: trò nối chữ, nhưng chơi cực giỏi.*
+- **Temperature**: núm chỉnh độ "ngẫu hứng" khi chọn chữ. *Ví dụ: 0 như học sinh trả lời đúng sách giáo khoa, 1 như nhà thơ.*
+- **Top-p**: chỉ bốc thăm trong nhóm chữ có khả năng cao nhất, cộng lại đủ p. *Ví dụ: chọn món, nhưng chỉ trong top món bán chạy.*
+- **KV cache**: phần "đã hiểu" của các token trước được lưu lại. *Ví dụ: ghi chú bên lề khi đọc sách.*
+- **Prefill**: bước đọc toàn bộ prompt cùng lúc. *Ví dụ: lướt đọc đề thi.*
+- **Decode**: bước viết câu trả lời từng token một. *Ví dụ: viết bài thi từng chữ.*
+- **TTFT (Time To First Token)**: thời gian chờ chữ đầu tiên hiện ra. *Ví dụ: từ lúc gọi món đến khi món đầu tiên được bưng ra.*
+- **Context rot**: context càng dài, model càng dễ bỏ sót chi tiết ở giữa. *Ví dụ: bàn chất đầy giấy thì khó tìm tờ quan trọng.*
+- **Hallucination (ảo giác)**: model tự tin bịa ra thứ không có thật. *Ví dụ: gợi ý dùng `array.sortBy()` trong JavaScript thuần.*
+- **MoE (Mixture of Experts)**: model có nhiều "chuyên gia" con, mỗi token chỉ gọi vài chuyên gia. *Ví dụ: bệnh viện 100 bác sĩ, mỗi ca chỉ cần 3–4 người khám.*
+- **Pretraining**: giai đoạn đọc khối lượng chữ và code khổng lồ để học đoán chữ tiếp theo. *Ví dụ: đọc hết thư viện quốc gia, biết nhiều nhưng chưa biết cách trả lời người khác.*
+- **Base model**: model vừa pretrain xong, chỉ biết "viết tiếp". *Ví dụ: hỏi "Thủ đô Pháp?", nó có thể viết tiếp "Thủ đô Đức?".*
+- **SFT / Instruction tuning**: dạy model bằng các cặp hỏi–đáp mẫu. *Ví dụ: đưa nhân viên mới 10.000 email mẫu trả lời khách.*
+- **RLHF**: người so sánh hai câu trả lời, chọn câu tốt hơn, model học theo. *Ví dụ: huấn luyện bằng phần thưởng.*
+- **Reward model**: "giám khảo máy" học cách chấm điểm giống con người. *Ví dụ: giám khảo tập sự học theo giám khảo chính.*
+- **RLAIF / Constitutional AI**: thay người chấm bằng một bộ nguyên tắc để AI tự chấm và tự sửa. *Ví dụ: công ty phát sổ tay quy tắc để nhân viên tự kiểm tra.*
+- **DPO**: học thẳng từ các cặp "câu A tốt hơn câu B". *Ví dụ: học trực tiếp từ đáp án mẫu.*
+- **Reasoning model / Thinking token**: model "nháp" suy nghĩ trước khi trả lời, phần nháp tính tiền như output. *Ví dụ: làm toán nháp ra giấy, giấy nháp cũng tốn mực.*
+- **Test-time compute**: cho model thêm thời gian suy nghĩ lúc trả lời. *Ví dụ: cho thêm 30 phút làm bài thay vì bắt đi học thêm.*
+- **Effort**: núm chỉnh mức suy nghĩ (low → max). *Ví dụ: sửa lỗi typo thì không cần họp cả phòng.*
+
+## 5. Tổng kết
 
 - Model = bản đồ ý nghĩa (embedding) + nhiều lớp attention + một bảng xác suất + sampler.
 - Chữ đầu tiên lâu hiện vì bước **prefill**, chữ sau nhanh hơn nhờ **KV cache**.
@@ -154,7 +180,7 @@ Reasoning model "nghĩ" trước khi trả lời: nó sinh ra một đoạn suy 
 - Model được dạy qua 4 bước: pretraining → SFT → preference tuning → RL cho reasoning.
 - Thinking token tính tiền như output, nên chỉnh effort cho hợp với việc.
 
-Phần sau mới là phần mình thích nhất: **từ chatbot thành agent**. Model không có tay chân, vậy làm sao nó sửa được code, chạy được test? MCP, skill, subagent là gì? Hẹn gặp lại mọi người ở phần III. See ya!
+Phần cuối mới là phần mình thích nhất: **agent**. Model không có tay chân, vậy làm sao nó sửa được code, chạy được test? MCP, skill, subagent là gì? Prompt caching giúp tiết kiệm tiền ra sao, và làm sao để agent không bị lừa? Hẹn gặp lại mọi người ở phần III. See ya!
 
 ________________
 
@@ -162,9 +188,6 @@ ________________
 
 - [Phần I: Hành trình của một request](/blog/ai-agent-a-to-z-part-1)
 - **Phần II: Bên trong model và cách model được dạy** (bài này)
-- [Phần III: Từ chatbot thành agent](/blog/ai-agent-a-to-z-part-3)
-- [Phần IV: Chi phí, caching và chuyện tự host](/blog/ai-agent-a-to-z-part-4)
-- [Phần V: Bảo mật và hệ sinh thái tool](/blog/ai-agent-a-to-z-part-5)
-- [Phần VI: Áp dụng cho team và từ điển thuật ngữ](/blog/ai-agent-a-to-z-part-6)
+- [Phần III: Agent, chi phí và bảo mật](/blog/ai-agent-a-to-z-part-3)
 
 **Nguồn tham khảo:** [Attention Is All You Need](https://arxiv.org/abs/1706.03762), [InstructGPT](https://arxiv.org/abs/2203.02155), [DPO](https://arxiv.org/abs/2305.18290), [DeepSeek-R1](https://arxiv.org/abs/2501.12948), [Constitutional AI](https://www.anthropic.com/research/constitutional-ai-harmlessness-from-ai-feedback), [Adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking), [Context windows](https://platform.claude.com/docs/en/build-with-claude/context-windows), [PagedAttention](https://arxiv.org/abs/2309.06180).
